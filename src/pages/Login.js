@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import logo from "../assets/img/logo-500.png";
 import { useMutation } from "@apollo/react-hooks";
+import { useForm } from "react-hook-form";
 import { useDispatch, shallowEqual, useSelector } from "react-redux";
 import { LOGIN_MUTATION } from "../graphql/mutation/auth";
 import { userLogin } from "../actions/authAction";
 
 const Login = ({ history }) => {
+  // react-hook-form
+  const { register, handleSubmit, errors } = useForm({ mode: "onChange" });
   const [inputs, setInputs] = useState({
     username: "",
     password: "",
@@ -24,8 +27,8 @@ const Login = ({ history }) => {
   };
 
   // Login functionality
-  const Login = (e) => {
-    e.preventDefault();
+  const handleLogin = (e) => {
+    // e.preventDefault();
     tokenAuth({
       variables: { username: inputs.username, password: inputs.password },
     }).then((res) => {
@@ -58,7 +61,7 @@ const Login = ({ history }) => {
               <h6 class="text-gray-900 text-sm font-bold">Sign in</h6>
             </div>
           </div>
-          <form className="space-y-6" onSubmit={Login}>
+          <form className="space-y-6" onSubmit={handleSubmit(handleLogin)}>
             <div>
               <label
                 htmlFor=""
@@ -67,6 +70,10 @@ const Login = ({ history }) => {
                 Username
               </label>
               <input
+                ref={register({
+                  required: true,
+                  minLength: 4,
+                })}
                 type="text"
                 value={inputs.username}
                 className="w-full p-2 border border-blue-300 rounded mt-1"
@@ -74,6 +81,9 @@ const Login = ({ history }) => {
                 placeholder="Username"
                 name="username"
               />
+              {errors.username && (
+                <p className="text-sm text-red-600">Enter a valid username</p>
+              )}
             </div>
             <div>
               <label
@@ -83,6 +93,9 @@ const Login = ({ history }) => {
                 Password
               </label>
               <input
+                ref={register({
+                  required: true,
+                })}
                 type="password"
                 value={inputs.password}
                 className="w-full p-2 border border-blue-300 rounded mt-1 mb-3"
@@ -90,6 +103,9 @@ const Login = ({ history }) => {
                 placeholder="Password"
                 name="password"
               />
+              {errors.username && (
+                <p className="text-sm text-red-600">Enter a valid username</p>
+              )}
             </div>
             <div>
               <button className="w-full py-2 px-4 bg-gray-900 hover:bg-green-900 mt-4 rounded-md text-white text-sm mb-3">
