@@ -45,8 +45,6 @@ const Register = ({ history }) => {
       },
     }).then((res) => {
       dispatch(userRegister(res.data));
-
-      console.log(res);
       history.push("/login");
     });
   };
