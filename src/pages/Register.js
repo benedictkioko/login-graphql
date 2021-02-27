@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { useDispatch, shallowEqual, useSelector } from "react-redux";
 import { REGISTER_MUTATION } from "../graphql/mutation/auth";
 import { userRegister } from "../actions/authAction"; //action creater
-import { data } from "autoprefixer";
 
 const Register = ({ history }) => {
   // react-hook-form
