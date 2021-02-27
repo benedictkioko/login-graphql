@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../assets/img/logo-500.png";
 import { useMutation } from "@apollo/react-hooks";
-import { useDispatch } from "react-redux";
+import { useDispatch, shallowEqual, useSelector } from "react-redux";
 import { LOGIN_MUTATION } from "../graphql/mutation/auth";
 import { userLogin } from "../actions/authAction";
 
@@ -13,6 +13,7 @@ const Login = ({ history }) => {
   });
   const [tokenAuth] = useMutation(LOGIN_MUTATION);
   const dispatch = useDispatch();
+  const state = useSelector((state) => state, shallowEqual);
 
   const handleChange = (e) => {
     e.persist();
@@ -32,6 +33,15 @@ const Login = ({ history }) => {
       history.push("/");
     });
   };
+
+  // block going back to login once authenticated
+  useEffect(() => {
+    if (state.auth.isAuthenticated) {
+      history.push("/");
+    } else {
+      history.push("/login");
+    }
+  }, [history, state.auth.isAuthenticated]);
 
   return (
     <div className="min-h-screen p-5 bg-gray-900 flex flex-col justify-center bg-fixed bg-hero-pattern">
@@ -59,7 +69,7 @@ const Login = ({ history }) => {
               <input
                 type="text"
                 value={inputs.username}
-                className="w-full p-2 border border-red-300 rounded mt-1"
+                className="w-full p-2 border border-blue-300 rounded mt-1"
                 onChange={handleChange}
                 placeholder="Username"
                 name="username"
@@ -75,7 +85,7 @@ const Login = ({ history }) => {
               <input
                 type="password"
                 value={inputs.password}
-                className="w-full p-2 border border-red-300 rounded mt-1 mb-3"
+                className="w-full p-2 border border-blue-300 rounded mt-1 mb-3"
                 onChange={handleChange}
                 placeholder="Password"
                 name="password"

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
 import {
   BrowserRouter as Router,
   Redirect,
@@ -15,23 +15,10 @@ import "./styles/main.css";
 import { useSelector, shallowEqual } from "react-redux";
 import { createBrowserHistory } from "history";
 
+const BrowserHistory = createBrowserHistory();
+
 const App = (props) => {
   const state = useSelector((state) => state, shallowEqual);
-
-  const isAuthenticated = state.auth.isAuthenticated;
-  const hist = createBrowserHistory();
-
-  useEffect(() => {
-    if (state.auth.accessToken != null) {
-      <Redirect
-        pushto={{
-          pathname: "/",
-        }}
-      />;
-      // hist.push("/");
-    }
-    console.log("useeffect", props.isAuthenticated);
-  });
 
   const PrivateRoute = ({ component: Component, ...rest }) => {
     return (
@@ -39,7 +26,7 @@ const App = (props) => {
         <Route
           {...rest}
           render={(props) =>
-            isAuthenticated ? (
+            state.auth.isAuthenticated ? (
               <Component {...props} />
             ) : (
               <Redirect to={{ pathname: "/login" }} />
@@ -50,7 +37,7 @@ const App = (props) => {
     );
   };
   return (
-    <Router history={hist}>
+    <Router history={BrowserHistory}>
       <div>
         <Switch>
           <PrivateRoute path="/" exact component={Home} />
