@@ -1,11 +1,15 @@
 import React from "react";
 import { useQuery } from "@apollo/react-hooks";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
+import { fetchTarget } from "../actions/dashAction";
 import HeaderStats from "../components/Header/HeaderStats";
 
 import { GET_TARGETS } from "../graphql/query/target";
 
 function Home(props) {
+  // dispatch actions
+  const dispatch = useDispatch();
+
   const { data, loading } = useQuery(GET_TARGETS, {
     fetchPolicy: "network-only",
   });
@@ -13,6 +17,8 @@ function Home(props) {
   if (loading) {
     return <div>Loading...</div>;
   }
+
+  console.log("api", data);
 
   console.log("data", props.isAuthenticated);
   return (
@@ -37,9 +43,16 @@ function Home(props) {
     </div>
   );
 }
+
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
   accessToken: state.auth.accessToken,
 });
 
-export default connect(mapStateToProps)(Home);
+const mapDispatchoProps = (dispatch) => {
+  return {
+    allTargets: () => dispatch(fetchTarget()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchoProps)(Home);

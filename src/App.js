@@ -8,9 +8,9 @@ import {
 import { connect } from "react-redux";
 
 import Home from "./pages/Home";
-import Login from "./pages/Login";
+import Login from "./pages/auth/Login";
 import Profile from "./pages/Profile";
-import Register from "./pages/Register";
+import Register from "./pages/auth/Register";
 import "./styles/main.css";
 import { useSelector, shallowEqual } from "react-redux";
 import { createBrowserHistory } from "history";
