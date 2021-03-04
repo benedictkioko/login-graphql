@@ -8,59 +8,50 @@ export default function HeaderStats() {
   return (
     <>
       {/* Header */}
-      <div className="relative bg-gray-900 md:pt-32 pb-32 pt-12">
+      <div className="relative bg-gradient-to-r from-gray-900 to-red-500 md:pt-32 pb-32 pt-12">
         <div className="px-4 md:px-10 mx-auto w-full">
           <div>
             {/* Card stats */}
             <div className="flex flex-wrap">
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
-                  statSubtitle="TRAFFIC"
-                  statTitle="350,897"
-                  statArrow="up"
-                  statPercent="3.48"
-                  statPercentColor="text-green-500"
-                  statDescripiron="Since last month"
-                  statIconName="far fa-chart-bar"
+                  statSubtitle="COUNTRIES"
+                  statTitle="3"
+                  statIconName="fas fa-map-marker-alt"
                   statIconColor="bg-red-500"
                 />
               </div>
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
-                  statSubtitle="NEW ASSETS"
-                  statTitle="2,356"
-                  statArrow="down"
-                  statPercent="3.48"
-                  statPercentColor="text-red-500"
-                  statDescripiron="Since last week"
-                  statIconName="fas fa-chart-pie"
-                  statIconColor="bg-orange-500"
+                  statSubtitle="TARGETS"
+                  statTitle="32,356"
+                  statIconName="fas fa-network-wired"
+                  statIconColor="bg-red-400"
                 />
               </div>
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
-                  statSubtitle="EXPLOITS"
-                  statTitle="924"
-                  statArrow="down"
-                  statPercent="1.10"
-                  statPercentColor="text-orange-500"
-                  statDescripiron="Since yesterday"
-                  statIconName="fas fa-users"
+                  statSubtitle="DOMAINS"
+                  statTitle="42,924"
+                  statIconName="fas fa-sitemap"
                   statIconColor="bg-pink-500"
                 />
               </div>
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
-                  statSubtitle="PERFORMANCE"
-                  statTitle="49,65%"
-                  statArrow="up"
-                  statPercent="12"
-                  statPercentColor="text-green-500"
-                  statDescripiron="Since last month"
-                  statIconName="fas fa-percent"
-                  statIconColor="bg-blue-500"
+                  statSubtitle="SERVICES"
+                  statTitle="49,6500"
+                  statIconName="fas fa-server"
+                  statIconColor="bg-green-500"
                 />
               </div>
+            </div>
+            <div className="w-full flex flex-wrap p-4">
+              <p className="text-2xl text-white py-4">
+                Currently Analyzing
+                <span className="text-red-600 text-2xl py-4"> 2,756,463 </span>
+                ASSETS
+              </p>
             </div>
           </div>
         </div>
