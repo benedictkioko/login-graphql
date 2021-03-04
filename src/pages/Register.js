@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import logo from "../../assets/img/logo-500.png";
+import logo from "../assets/img/logo-500.png";
 import { useMutation } from "@apollo/react-hooks";
 import { useForm } from "react-hook-form";
 import { useDispatch, shallowEqual, useSelector } from "react-redux";
-import { REGISTER_MUTATION } from "../../graphql/mutation/auth";
-import { userRegister } from "../../actions/authAction"; //action creater
+import { REGISTER_MUTATION } from "../graphql/mutation/auth";
+import { userRegister } from "../actions/authAction"; //action creater
 import { Link } from "react-router-dom";
 
 const Register = ({ history }) => {

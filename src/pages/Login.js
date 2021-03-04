@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import logo from "../../assets/img/logo-500.png";
+import logo from "../assets/img/logo-500.png";
 import { useMutation } from "@apollo/react-hooks";
 import { useForm } from "react-hook-form";
 import { useDispatch, shallowEqual, useSelector } from "react-redux";
-import { LOGIN_MUTATION } from "../../graphql/mutation/auth";
-import { userLogin } from "../../actions/authAction";
+import { LOGIN_MUTATION } from "../graphql/mutation/auth";
+import { userLogin } from "../actions/authAction";
 import { Link } from "react-router-dom";
 
 const Login = ({ history }) => {

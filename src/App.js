@@ -8,9 +8,9 @@ import {
 import { connect } from "react-redux";
 
 import Home from "./pages/Home";
-import Login from "./pages/auth/Login";
+import Login from "./pages/Login";
 import Profile from "./pages/Profile";
-import Register from "./pages/auth/Register";
+import Register from "./pages/Register";
 import "./styles/main.css";
 import { useSelector, shallowEqual } from "react-redux";
 import { createBrowserHistory } from "history";
@@ -40,8 +40,10 @@ const App = (props) => {
     <Router history={BrowserHistory}>
       <div>
         <Switch>
+          {/* protected routes */}
           <PrivateRoute path="/" exact component={Home} />
           <PrivateRoute path="/profile" component={Profile} />
+          {/* umprotected routes */}
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
         </Switch>
