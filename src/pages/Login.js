@@ -34,14 +34,14 @@ const Login = ({ history }) => {
       variables: { username: inputs.username, password: inputs.password },
     }).then((res) => {
       dispatch(userLogin(res.data));
-      history.push("/");
+      history.push("/admin/dashboard");
     });
   };
 
   // block going back to login once authenticated
   useEffect(() => {
     if (state.auth.isAuthenticated) {
-      history.push("/");
+      history.push("/admin/dashboard");
     } else {
       history.push("/login");
     }

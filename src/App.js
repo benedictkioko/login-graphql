@@ -6,14 +6,20 @@ import {
   Switch,
 } from "react-router-dom";
 import { connect } from "react-redux";
-
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Profile from "./pages/Profile";
-import Register from "./pages/Register";
-import "./styles/main.css";
 import { useSelector, shallowEqual } from "react-redux";
 import { createBrowserHistory } from "history";
+
+// css
+import "./styles/main.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+
+// pages
+import Login from "./pages/Login";
+import Profile from "./pages/auth/Profile";
+import Register from "./pages/Register";
+
+// layout
+import Admin from "./layouts/Admin";
 
 const BrowserHistory = createBrowserHistory();
 
@@ -41,7 +47,7 @@ const App = (props) => {
       <div>
         <Switch>
           {/* protected routes */}
-          <PrivateRoute path="/" exact component={Home} />
+          <PrivateRoute path="/admin" component={Admin} />
           <PrivateRoute path="/profile" component={Profile} />
           {/* umprotected routes */}
           <Route path="/login" component={Login} />

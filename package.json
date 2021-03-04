@@ -4,7 +4,9 @@
   "private": true,
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",
+    "@fortawesome/fontawesome-free": "^5.15.2",
     "@popperjs/core": "^2.8.4",
+    "@tailwindcss/custom-forms": "^0.2.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -28,7 +30,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "gen": "graphql-codegen --config codegen.yml"
+    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && yarn && yarn build:css && yarn start"
   },
   "eslintConfig": {
     "extends": [
@@ -54,6 +56,6 @@
     "postcss": "^8.2.6",
     "postcss-cli": "^8.3.1",
     "redux-devtools-extension": "^2.13.8",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat"
+    "tailwindcss": "^2.0.3"
   }
 }
