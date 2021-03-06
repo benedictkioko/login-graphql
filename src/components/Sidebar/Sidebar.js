@@ -130,7 +130,7 @@ export default function Sidebar() {
                   className={
                     "text-xs uppercase py-3 font-bold block " +
                     (window.location.href.indexOf("/admin/stats") !== -1
-                      ? "text-blue-500 hover:text-blue-600"
+                      ? "text-red-500 hover:text-red-600"
                       : "text-gray-800 hover:text-gray-600")
                   }
                   to="/admin/stats"
