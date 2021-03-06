@@ -19,9 +19,9 @@ const Notification = () => {
   };
   return (
     <>
-      <a
+      <Link
+        to="/admin/dashboard"
         className="text-gray-600 block py-1 px-3"
-        href="#pablo"
         ref={btnDropdownRef}
         onClick={(e) => {
           e.preventDefault();
@@ -29,7 +29,7 @@ const Notification = () => {
         }}
       >
         <i className="fas fa-bell"></i>
-      </a>
+      </Link>
       <div
         ref={popoverDropdownRef}
         className={
