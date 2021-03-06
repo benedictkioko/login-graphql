@@ -18,9 +18,9 @@ const User = () => {
   };
   return (
     <>
-      <a
+      <Link
+        to="/admin/dashboard"
         className="text-gray-600 block"
-        href="#pablo"
         ref={btnDropdownRef}
         onClick={(e) => {
           e.preventDefault();
@@ -37,7 +37,7 @@ const User = () => {
             />
           </span>
         </div>
-      </a>
+      </Link>
       <div
         ref={popoverDropdownRef}
         className={
@@ -67,7 +67,7 @@ const User = () => {
         <Link
           to=""
           className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800"
+            "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent hover:bg-gray-400 hover:text-white text-gray-900"
           }
           onClick={(e) => e.preventDefault()}
         >
