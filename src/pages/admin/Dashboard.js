@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { connect, useDispatch } from "react-redux";
 import { fetchTarget } from "../../actions/dashAction";
 
 import { GET_TARGETS } from "../../graphql/query/target";
+import CountryStats from "../../components/Cards/CountryStats";
+import AsnPortStats from "../../components/Cards/AsnPortStats";
 
 function Dashboard(props) {
   // dispatch actions
@@ -11,44 +13,79 @@ function Dashboard(props) {
 
   const { data, loading } = useQuery(GET_TARGETS, {
     fetchPolicy: "network-only",
+    // variables: {
+    //   n: 50,
+    //   offset: 0,
+    //   search: "",
+    // },
   });
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  const targetData = data?.allTargets;
 
-  console.log("api", data);
+  console.log("api", targetData);
 
-  console.log("data", props.isAuthenticated);
+  // console.log("data", props.isAuthenticated);
+
+  // useEffect(() => {
+
+  // }, []);
+
+  const handleClickMeClicked = () => {
+    const variables = {
+      n: 500,
+      offset: 5000,
+    };
+    dispatch(fetchTarget(variables));
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center bg-fixed">
-      <div></div>
-      {/* <ul>
-        {data.allTargets.map((x) => {
-          return (
-            <li
-              key={x.id}
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-            >
-              {" "}
-              {x.id} | {x.name} | {x.target} | {x.ip}
-            </li>
-          );
-        })}
-      </ul> */}
-    </div>
+    <>
+      {loading && <div>Loading...</div>}
+      <div className="flex flex-wrap">
+        <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4">
+          <CountryStats />
+        </div>
+        <div className="w-full xl:w-4/12 px-4">
+          <AsnPortStats />
+        </div>
+      </div>
+      <div className="flex flex-wrap mt-4">
+        <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4">
+          {/* <CardPageVisits /> */}
+          <ul>
+            {targetData?.map((x) => {
+              return (
+                <li
+                  key={x.id}
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  {" "}
+                  {x.id} | {x.name} | {x.target} | {x.ip}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        <div className="w-full xl:w-4/12 px-4">
+          {/* <CardSocialTraffic /> */}
+        </div>
+        <div onClick={handleClickMeClicked}>Pagination</div>
+        <div onClick={handleClickMeClicked}>Search</div>
+      </div>
+    </>
   );
 }
 
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated,
-  accessToken: state.auth.accessToken,
-});
+// const mapStateToProps = (state) => ({
+//   isAuthenticated: state.auth.isAuthenticated,
+//   accessToken: state.auth.accessToken,
+// });
 
-const mapDispatchoProps = (dispatch) => {
-  return {
-    allTargets: () => dispatch(fetchTarget()),
-  };
-};
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     allTargets: () => dispatch(fetchTarget()),
+//   };
+// };
 
-export default connect(mapStateToProps, mapDispatchoProps)(Dashboard);
+// export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default Dashboard;
