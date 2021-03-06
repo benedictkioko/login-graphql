@@ -7,8 +7,8 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: (theme) => ({
-        "hero-pattern": "url('../assets/img/bg.png')",
-        "hero-large-blue": "url('../assets/img/large-blue.jpeg')",
+        "hero-pattern": "url('../img/bg.png')",
+        "hero-large-blue": "url('../img/large-blue.jpeg')",
       }),
     },
     screens: {
