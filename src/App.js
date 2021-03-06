@@ -10,13 +10,13 @@ import { useSelector, shallowEqual } from "react-redux";
 import { createBrowserHistory } from "history";
 
 // css
-import "./styles/main.css";
+import "./assets/styles/main.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 // pages
 import Login from "./pages/Login";
-import Profile from "./pages/auth/Profile";
 import Register from "./pages/Register";
+import Profile from "./pages/Profile";
 
 // layout
 import Admin from "./layouts/Admin";
