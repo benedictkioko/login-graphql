@@ -1,21 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
 import User from "../Dropdowns/User";
+import { Link } from "react-router-dom";
+
+import { setSearchQuery } from "../../actions/dashAction";
 
 export default function Navbar() {
+  const dispatch = useDispatch();
+  const [searchQuery, setSearch] = useState("");
+  const handleSearchChanged = (event) => {
+    const searchQuery = event?.target?.value;
+    setSearch(searchQuery);
+  };
+  const handleSearchKeyUp = () => {
+    console.log("SEARC", searchQuery);
+    dispatch(setSearchQuery(searchQuery));
+  };
   return (
     <>
       {/* Navbar */}
       <nav className="absolute top-0 left-0 w-full z-10 bg-transparent md:flex-row md:flex-no-wrap md:justify-start flex items-center p-4">
         <div className="w-full mx-autp items-center flex justify-between md:flex-no-wrap flex-wrap md:px-10 px-4">
           {/* Brand */}
-          <a
+          <Link
+            to="/admin/dashboard"
             className="text-white text-sm uppercase hidden lg:inline-block font-semibold"
-            href="#pablo"
             onClick={(e) => e.preventDefault()}
           >
             Dashboard
-          </a>
+          </Link>
           {/* Form */}
           <form className="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-3">
             <div className="relative flex w-full flex-wrap items-stretch">
@@ -23,6 +37,8 @@ export default function Navbar() {
                 <i className="fas fa-search"></i>
               </span>
               <input
+                onChange={handleSearchChanged}
+                onKeyUp={handleSearchKeyUp}
                 type="text"
                 placeholder="Search here..."
                 className="px-3 py-3 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
