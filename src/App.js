@@ -20,6 +20,7 @@ import Profile from "./pages/Profile";
 
 // layout
 import Admin from "./layouts/Admin";
+import Scot from "./layouts/Scot";
 
 const BrowserHistory = createBrowserHistory();
 
@@ -48,10 +49,12 @@ const App = (props) => {
         <Switch>
           {/* protected routes */}
           <PrivateRoute path="/admin" component={Admin} />
+          <PrivateRoute path="/app" component={Scot} />
           <PrivateRoute path="/profile" component={Profile} />
           {/* umprotected routes */}
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
+          <Redirect from="*" to="/login" />
         </Switch>
       </div>
     </Router>
