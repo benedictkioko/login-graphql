@@ -107,16 +107,16 @@ export default function Sidebar() {
                 <Link
                   className={
                     "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/admin/target") !== -1
+                    (window.location.href.indexOf("/app/target") !== -1
                       ? "text-red-500 hover:text-red-600"
                       : "text-gray-800 hover:text-gray-600")
                   }
-                  to="/admin/target"
+                  to="/app/target"
                 >
                   <i
                     className={
                       "fas fa-jedi mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/target") !== -1
+                      (window.location.href.indexOf("/app/target") !== -1
                         ? "opacity-75"
                         : "text-gray-400")
                     }
@@ -129,16 +129,16 @@ export default function Sidebar() {
                 <Link
                   className={
                     "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/admin/stats") !== -1
+                    (window.location.href.indexOf("/app/stats") !== -1
                       ? "text-red-500 hover:text-red-600"
                       : "text-gray-800 hover:text-gray-600")
                   }
-                  to="/admin/stats"
+                  to="/app/stats"
                 >
                   <i
                     className={
                       "fas fa-sort-numeric-up mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/stats") !== -1
+                      (window.location.href.indexOf("/app/stats") !== -1
                         ? "opacity-75"
                         : "text-gray-400")
                     }
@@ -157,29 +157,65 @@ export default function Sidebar() {
             <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
               <li className="items-center">
                 <Link
-                  className="text-gray-800 hover:text-gray-600 text-xs uppercase py-3 font-bold block"
-                  to="/admin/asr"
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (window.location.href.indexOf("/app/asr") !== -1
+                      ? "text-red-500 hover:text-red-600"
+                      : "text-gray-800 hover:text-gray-600")
+                  }
+                  to="/app/asr"
                 >
-                  <i className="fas fa-project-diagram text-gray-500 mr-2 text-sm"></i>{" "}
+                  <i
+                    className={
+                      "fas fa-sort-numeric-up mr-2 text-sm " +
+                      (window.location.href.indexOf("/app/asr") !== -1
+                        ? "opacity-75"
+                        : "text-gray-400")
+                    }
+                  ></i>{" "}
                   ASR
                 </Link>
               </li>
 
               <li className="items-center">
                 <Link
-                  className="text-gray-800 hover:text-gray-600 text-xs uppercase py-3 font-bold block"
-                  to="/admin/exploitation"
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (window.location.href.indexOf("/app/exploitation") !== -1
+                      ? "text-red-500 hover:text-red-600"
+                      : "text-gray-800 hover:text-gray-600")
+                  }
+                  to="/app/exploitation"
                 >
-                  <i className="fas fa-pastafarianism text-gray-500 mr-2 text-sm"></i>{" "}
-                  EXPLOITATION
+                  <i
+                    className={
+                      "fas fa-sort-numeric-up mr-2 text-sm " +
+                      (window.location.href.indexOf("/app/exploitation") !== -1
+                        ? "opacity-75"
+                        : "text-gray-400")
+                    }
+                  ></i>{" "}
+                  Exploitation
                 </Link>
               </li>
               <li className="items-center">
                 <Link
-                  className="text-gray-800 hover:text-gray-600 text-xs uppercase py-3 font-bold block"
-                  to="/admin/spectrum"
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (window.location.href.indexOf("/app/spectrum") !== -1
+                      ? "text-red-500 hover:text-red-600"
+                      : "text-gray-800 hover:text-gray-600")
+                  }
+                  to="/app/spectrum"
                 >
-                  <i className="fas fa-globe text-gray-500 mr-2 text-sm"></i>{" "}
+                  <i
+                    className={
+                      "fas fa-sort-numeric-up mr-2 text-sm " +
+                      (window.location.href.indexOf("/app/spectrum") !== -1
+                        ? "opacity-75"
+                        : "text-gray-400")
+                    }
+                  ></i>{" "}
                   SPECTRUM
                 </Link>
               </li>

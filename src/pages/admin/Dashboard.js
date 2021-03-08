@@ -32,8 +32,8 @@ function Dashboard(props) {
 
   const handleClickMeClicked = () => {
     const variables = {
-      n: 500,
-      offset: 5000,
+      n: 50,
+      offset: 0,
     };
     dispatch(fetchTarget(variables));
   };
@@ -76,16 +76,4 @@ function Dashboard(props) {
   );
 }
 
-// const mapStateToProps = (state) => ({
-//   isAuthenticated: state.auth.isAuthenticated,
-//   accessToken: state.auth.accessToken,
-// });
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     allTargets: () => dispatch(fetchTarget()),
-//   };
-// };
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
 export default Dashboard;

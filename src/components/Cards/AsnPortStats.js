@@ -16,7 +16,7 @@ export default function CardSocialTraffic() {
             </div>
             <div className="relative w-full px-4 py-3 max-w-full flex-grow flex-1 text-right">
               <Link
-                to="/admin/stats"
+                to="/app/target"
                 className="mt-4 px-4 py-2 border-b-2 border-blue-400 font-bold text-gray-500 hover:border-red-500"
               >
                 <i className="fas fa-eye bg-transparent mr-2 text-sm"> view</i>

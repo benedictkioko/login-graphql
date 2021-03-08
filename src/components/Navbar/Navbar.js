@@ -1,22 +1,7 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-
 import User from "../Dropdowns/User";
 import { Link } from "react-router-dom";
 
-import { setSearchQuery } from "../../actions/dashAction";
-
 export default function Navbar() {
-  const dispatch = useDispatch();
-  const [searchQuery, setSearch] = useState("");
-  const handleSearchChanged = (event) => {
-    const searchQuery = event?.target?.value;
-    setSearch(searchQuery);
-  };
-  const handleSearchKeyUp = () => {
-    console.log("SEARC", searchQuery);
-    dispatch(setSearchQuery(searchQuery));
-  };
   return (
     <>
       {/* Navbar */}
@@ -30,21 +15,12 @@ export default function Navbar() {
           >
             Dashboard
           </Link>
-          {/* Form */}
-          <form className="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-3">
+          {/* Greetings */}
+          <div className="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-3">
             <div className="relative flex w-full flex-wrap items-stretch">
-              <span className="z-10 h-full leading-snug font-normal absolute text-center text-gray-400 absolute bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3">
-                <i className="fas fa-search"></i>
-              </span>
-              <input
-                onChange={handleSearchChanged}
-                onKeyUp={handleSearchKeyUp}
-                type="text"
-                placeholder="Search here..."
-                className="px-3 py-3 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
-              />
+              <h3 className="text-white font-bold">Welcome,</h3>
             </div>
-          </form>
+          </div>
           {/* User */}
           <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
             <User />

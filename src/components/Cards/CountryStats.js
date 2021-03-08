@@ -1,6 +1,4 @@
 import React from "react";
-import React from "react";
-import React from "react";
 import { Link } from "react-router-dom";
 
 // components
@@ -18,7 +16,7 @@ export default function CountryStats() {
             </div>
             <div className="relative w-full px-4 py-3 max-w-full flex-grow flex-1 text-right">
               <Link
-                to="/admin/stats"
+                to="/app/stats"
                 className="rounded-md py-2 px-4 text-gray-100 bg-gray-600 hover:bg-gray-900 focus:outline-none"
               >
                 view more

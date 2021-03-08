@@ -2,8 +2,8 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Dashboard from "../pages/admin/Dashboard.js";
-import Target from "../pages/admin/Target.js";
-import Stats from "../pages/admin/Stats";
+import Target from "../pages/app/target.js";
+import Stats from "../pages/app/stats";
 
 export const routes = [
   {
@@ -32,12 +32,12 @@ export const routes = [
     component: Dashboard,
   },
   {
-    path: "/admin/target",
+    path: "/app/target",
     exact: true,
     component: Target,
   },
   {
-    path: "/admin/stats",
+    path: "/app/stats",
     exact: true,
     component: Stats,
   },

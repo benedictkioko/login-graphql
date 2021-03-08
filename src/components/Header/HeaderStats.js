@@ -40,7 +40,7 @@ export default function HeaderStats() {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="SERVICES"
-                  statTitle="49,6500"
+                  statTitle="49,650"
                   statIconName="fas fa-server"
                   statIconColor="bg-green-500"
                 />
@@ -49,7 +49,10 @@ export default function HeaderStats() {
             <div className="w-full flex flex-wrap p-4">
               <p className="text-2xl text-white py-4">
                 Currently Analyzing
-                <span className="text-red-600 text-2xl py-4"> 2,756,463 </span>
+                <span className="text-green-600 text-2xl py-4">
+                  {" "}
+                  2,756,463{" "}
+                </span>
                 ASSETS
               </p>
             </div>

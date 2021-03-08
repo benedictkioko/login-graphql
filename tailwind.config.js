@@ -1,9 +1,25 @@
 const colors = require("tailwindcss/colors");
 
 module.exports = {
-  purge: [],
+  purge: {
+    enabled: true,
+    content: [
+      "./public/**/*.html",
+      "./public/*.html",
+      "./src/**/*.js",
+      "./src/*.js",
+      "./src/**/*.html",
+      "./src/*.html",
+      "./public/**/*.js",
+      "./public/*.js",
+    ],
+    options: {
+      whitelist: [],
+    },
+  },
   presets: [],
   darkMode: false, // or 'media' or 'class'
+  plugins: [require("@tailwindcss/custom-forms")],
   theme: {
     extend: {
       backgroundImage: (theme) => ({
