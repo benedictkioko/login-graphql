@@ -215,7 +215,7 @@ const Register = ({ history }) => {
         <div class="flex flex-wrap mt-6 items-center">
           <div class="w-full text-center">
             <Link to="/login" className="text-gray-300">
-              Have an account? Login
+              Already have an account?
             </Link>
           </div>
         </div>
