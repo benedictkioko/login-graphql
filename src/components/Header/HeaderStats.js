@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { shallowEqual, useSelector } from "react-redux";
 
 // components
 
 import CardStats from "../Cards/CardStats.js";
 
-export default function HeaderStats() {
+function HeaderStats(props) {
+  const state = useSelector((state) => state, shallowEqual);
+
+  useEffect(() => {
+    if (state) {
+      console.log("header", state.dashboard.totalCountries);
+    }
+  }, [state]);
+
   return (
     <>
       {/* Header */}
@@ -16,7 +25,7 @@ export default function HeaderStats() {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="COUNTRIES"
-                  statTitle="3"
+                  statTitle={state.dashboard.totalCountries.toLocaleString()}
                   statIconName="fas fa-map-marker-alt"
                   statIconColor="bg-red-500"
                 />
@@ -24,7 +33,7 @@ export default function HeaderStats() {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="TARGETS"
-                  statTitle="32,356"
+                  statTitle={state.dashboard.totalTargets.toLocaleString()}
                   statIconName="fas fa-network-wired"
                   statIconColor="bg-red-400"
                 />
@@ -32,7 +41,7 @@ export default function HeaderStats() {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="DOMAINS"
-                  statTitle="42,924"
+                  statTitle={state.dashboard.totalDomains.toLocaleString()}
                   statIconName="fas fa-sitemap"
                   statIconColor="bg-pink-500"
                 />
@@ -40,7 +49,7 @@ export default function HeaderStats() {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="SERVICES"
-                  statTitle="49,650"
+                  statTitle={state.dashboard.totalServices.toLocaleString()}
                   statIconName="fas fa-server"
                   statIconColor="bg-green-500"
                 />
@@ -62,3 +71,5 @@ export default function HeaderStats() {
     </>
   );
 }
+
+export default HeaderStats;
