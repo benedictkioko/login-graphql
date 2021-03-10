@@ -167,7 +167,7 @@ export default function Sidebar() {
                 >
                   <i
                     className={
-                      "fas fa-sort-numeric-up mr-2 text-sm " +
+                      "fas fa-project-diagram mr-2 text-sm " +
                       (window.location.href.indexOf("/app/asr") !== -1
                         ? "opacity-75"
                         : "text-gray-400")
@@ -189,7 +189,7 @@ export default function Sidebar() {
                 >
                   <i
                     className={
-                      "fas fa-sort-numeric-up mr-2 text-sm " +
+                      "fas fa-pastafarianism mr-2 text-sm " +
                       (window.location.href.indexOf("/app/exploitation") !== -1
                         ? "opacity-75"
                         : "text-gray-400")
@@ -210,7 +210,7 @@ export default function Sidebar() {
                 >
                   <i
                     className={
-                      "fas fa-sort-numeric-up mr-2 text-sm " +
+                      "fas fa-globe mr-2 text-sm " +
                       (window.location.href.indexOf("/app/spectrum") !== -1
                         ? "opacity-75"
                         : "text-gray-400")
