@@ -48,6 +48,7 @@ module.exports = {
       indigo: colors.indigo,
       purple: colors.violet,
       pink: colors.pink,
+      teal: colors.teal,
       custom: "#161313cc",
     },
     spacing: {
