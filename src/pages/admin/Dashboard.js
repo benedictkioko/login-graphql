@@ -1,10 +1,29 @@
 import React, { useEffect } from "react";
+import { useQuery } from "@apollo/react-hooks";
+import { useDispatch, shallowEqual, useSelector } from "react-redux";
 
+// components
 import CountryStats from "../../components/Cards/CountryStats";
 import AsnPortStats from "../../components/Cards/AsnPortStats";
 
+// graphql
+import { DASH_STATS } from "../../graphql/query/target";
+
 function Dashboard(props) {
   // dispatch actions
+  const dispatch = useDispatch();
+
+  const { data, loading } = useQuery(DASH_STATS, {
+    fetchPolicy: "network-only",
+  });
+
+  const state = useSelector((state) => state, shallowEqual);
+
+  useEffect(() => {
+    if (state) {
+      console.log("countries", state.dashboard.totalCountries);
+    }
+  }, [state]);
 
   return (
     <>
