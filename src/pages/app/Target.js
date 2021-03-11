@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { useDispatch } from "react-redux";
+import ReactPaginate from "react-paginate";
 
 // actions
 import { fetchTarget } from "../../actions/dashAction";
@@ -11,32 +12,48 @@ import { GET_TARGETS } from "../../graphql/query/target";
 // components
 import Search from "../../components/Forms/Search";
 import TargetDefination from "../../components/Forms/TargetDefination";
-import SearchResults from "../../components/Tables/SearchResults";
+import Header from "../../components/Tables/SearchResults/Header";
+import Body from "../../components/Tables/SearchResults/Body";
 
 function Target() {
-  // const [data, setData] = useState([]);
-  const dispatch = useDispatch();
+  // set the local state
+  const [targets, setTargets] = useState([]);
+  const [pageNumber, setPageNumber] = useState(0);
 
+  const targetPerPage = 10;
+  const pagesVisted = pageNumber * targetPerPage;
+
+  // get data from graphql
   const { data, loading } = useQuery(GET_TARGETS, {
     fetchPolicy: "network-only",
     variables: {
-      n: 10,
+      n: 100,
       offset: 0,
       search: "",
     },
   });
 
-  const targetData = data?.allTargets;
+  useEffect(() => {
+    if (!loading && data) {
+      setTargets(data?.allTargets);
+    }
+  }, [data, loading]);
 
-  useEffect(() => {}, []);
+  // const targetData = data?.allTargets;
+  // console.log("Targets", targetData);
 
-  const handleClickMeClicked = () => {
-    const variables = {
-      n: 50,
-      offset: 0,
-    };
-    dispatch(fetchTarget(variables));
+  const displayTargets = targets
+    .slice(pagesVisted, pagesVisted + targetPerPage)
+    .map((target) => {
+      return <Body data={target} />;
+    });
+
+  const pageCount = Math.ceil(targets.length / targetPerPage);
+
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
   };
+
   return (
     <>
       {loading && <div>Loading...</div>}
@@ -54,49 +71,38 @@ function Target() {
 
               <div className="shadow overflow-hidden overflow-x-auto border-b border-gray-200 sm:rounded-lg">
                 {/* table */}
-                <SearchResults data={targetData} />
+                {/* <SearchResults data={targets} /> */}
+                <table className="w-full divide-y divide-gray-200">
+                  <Header />
+                  {displayTargets}
+                </table>
                 {/* Pagination */}
-                <div className="px-5 py-5 border-t flex flex-col xs:flex-row items-center xs:justify-between mt-4 mb-6">
-                  <span className="text-sm xs:text-sm text-bold text-gray-900">
-                    Showing 1 to 10 of 50 Entries
-                  </span>
+                <div className="px-5 py-5 border-t flex flex-col sm:hidden xs:flex-row items-center xs:justify-between mt-4 mb-6">
                   <div className="inline-flex mt-2 xs:mt-0">
-                    <button className="border border-teal-500 text-teal-500 block rounded-sm font-bold py-2 px-6 mr-2 flex items-center hover:bg-teal-500 hover:text-white">
-                      <svg
-                        className="h-5 w-5 mr-2 fill-current"
-                        version="1.1"
-                        id="Layer_1"
-                        xmlns="http://www.w3.org/2000/svg"
-                        x="0px"
-                        y="0px"
-                        viewBox="-49 141 512 512"
-                      >
-                        <path
-                          id="XMLID_10_"
-                          d="M438,372H36.355l72.822-72.822c9.763-9.763,9.763-25.592,0-35.355c-9.763-9.764-25.593-9.762-35.355,0 l-115.5,115.5C-46.366,384.01-49,390.369-49,397s2.634,12.989,7.322,17.678l115.5,115.5c9.763,9.762,25.593,9.763,35.355,0 c9.763-9.763,9.763-25.592,0-35.355L36.355,422H438c13.808,0,25-11.193,25-25S451.808,372,438,372z"
-                        ></path>
-                      </svg>
-                      Previous page
-                    </button>
-                    <button className="border border-teal-500 bg-teal-500 text-white block rounded-sm font-bold py-2 px-6 ml-2 flex items-center">
-                      Next page
-                      <svg
-                        className="h-5 w-5 ml-2 fill-current"
-                        clasversion="1.1"
-                        id="Layer_1"
-                        xmlns="http://www.w3.org/2000/svg"
-                        x="0px"
-                        y="0px"
-                        viewBox="-49 141 512 512"
-                      >
-                        <path
-                          id="XMLID_11_"
-                          d="M-24,422h401.645l-72.822,72.822c-9.763,9.763-9.763,25.592,0,35.355c9.763,9.764,25.593,9.762,35.355,0
-              l115.5-115.5C460.366,409.989,463,403.63,463,397s-2.634-12.989-7.322-17.678l-115.5-115.5c-9.763-9.762-25.593-9.763-35.355,0
-              c-9.763,9.763-9.763,25.592,0,35.355l72.822,72.822H-24c-13.808,0-25,11.193-25,25S-37.808,422-24,422z"
-                        />
-                      </svg>
-                    </button>
+                    <ReactPaginate
+                      previousLabel={"Previous page"}
+                      nextLabel={"Next page"}
+                      pageCount={pageCount}
+                      onPageChange={changePage}
+                      containerClassName={
+                        "flex rounded-sm font-bold py-2 px-2 mx-4 items-center"
+                      }
+                      previousLinkClassName={
+                        "border border-teal-500 text-teal-500 block rounded-sm font-bold py-2 px-4 flex items-center hover:bg-teal-500 hover:text-white"
+                      }
+                      nextLinkClassName={
+                        "border border-teal-500 text-teal-500 block rounded-sm font-bold py-2 px-4 flex items-center hover:bg-teal-500 hover:text-white"
+                      }
+                      disabledClassName={
+                        "disabled mx-2 bg-teal-200 text-white hover:text-white"
+                      }
+                      pageLinkClassName={
+                        "border border-teal-500 text-gray-900 block rounded-sm font-normal py-2 px-4 mx-2 flex items-center hover:bg-teal-500 hover:text-white"
+                      }
+                      activeLinkClassName={
+                        "border border-teal-500 bg-teal-500 text-white block rounded-sm font-bold py-2 px-2 ml-2"
+                      }
+                    />
                   </div>
                 </div>
               </div>
