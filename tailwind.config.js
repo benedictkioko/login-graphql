@@ -567,7 +567,7 @@ module.exports = {
     placeholderColor: (theme) => theme("colors"),
     placeholderOpacity: (theme) => theme("opacity"),
     ringColor: (theme) => ({
-      DEFAULT: theme("colors.blue.500", "#3b82f6"),
+      DEFAULT: theme("colors.blue.500", "#3b82f6", "colors.gray.500"),
       ...theme("colors"),
     }),
     ringOffsetColor: (theme) => theme("colors"),
@@ -776,6 +776,7 @@ module.exports = {
     "disabled",
   ],
   variants: {
+    opacity: ({ after }) => after(["disabled"]),
     accessibility: ["responsive", "focus-within", "focus"],
     alignContent: ["responsive"],
     alignItems: ["responsive"],
@@ -876,7 +877,7 @@ module.exports = {
     minWidth: ["responsive"],
     objectFit: ["responsive"],
     objectPosition: ["responsive"],
-    opacity: ["responsive", "group-hover", "focus-within", "hover", "focus"],
+    // opacity: ["responsive", "group-hover", "focus-within", "hover", "focus"],
     order: ["responsive"],
     outline: ["responsive", "focus-within", "focus"],
     overflow: ["responsive"],
