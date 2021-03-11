@@ -22,8 +22,8 @@ export default function Form() {
         <div class="flex items-center justify-center">
           <div class="container mx-24rounded  px-4">
             <div class="px-6 py-6">
-              <div class="text-center mb-4">
-                <h1 class="font-bold text-sm text-grey-darkest leading-loose my-3">
+              <div class="text-center mb-2">
+                <h1 class="font-bold text-sm text-grey-darkest leading-loose">
                   Search for a target
                 </h1>
                 <div class="text-center py-4">
