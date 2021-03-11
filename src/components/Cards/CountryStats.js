@@ -11,7 +11,7 @@ export default function CountryStats() {
           <div className="flex flex-wrap items-center">
             <div className="relative w-full px-4 max-w-full flex-grow flex-1">
               <h3 className="font-semibold text-base text-gray-800">
-                TOP ORGANIZATIONS
+                TOP ORGANISATIONS
               </h3>
             </div>
             <div className="relative w-full px-4 py-3 max-w-full flex-grow flex-1 text-right">
@@ -30,7 +30,7 @@ export default function CountryStats() {
             <thead>
               <tr>
                 <th className="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
-                  Organization
+                  Organisation
                 </th>
                 <th className="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
                   Value
