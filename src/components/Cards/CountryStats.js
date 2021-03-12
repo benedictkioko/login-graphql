@@ -16,7 +16,7 @@ export default function CountryStats() {
             </div>
             <div className="relative w-full px-4 py-3 max-w-full flex-grow flex-1 text-right">
               <Link
-                to="/app/stats"
+                to="/app/statistics"
                 className="rounded-md py-2 px-4 text-gray-100 bg-gray-600 hover:bg-gray-900 focus:outline-none"
               >
                 view more
