@@ -2,6 +2,9 @@ import User from "../Dropdowns/User";
 import { Link } from "react-router-dom";
 
 export default function Navbar() {
+  const getLastItem = (thePath) =>
+    thePath.substring(thePath.lastIndexOf("/") + 1);
+
   return (
     <>
       {/* Navbar */}
@@ -13,8 +16,25 @@ export default function Navbar() {
             className="text-white text-sm uppercase hidden lg:inline-block font-semibold"
             onClick={(e) => e.preventDefault()}
           >
-            Dashboard
+            Home
           </Link>
+
+          <svg
+            class="flex-shrink-0 h-5 w-5 text-gray-400"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          <span className="text-white text-sm uppercase hidden lg:inline-block font-semibold">
+            {getLastItem(window.location.pathname).toUpperCase()}
+          </span>
           {/* Greetings */}
           <div className="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-3">
             <div className="relative flex w-full flex-wrap items-stretch">
