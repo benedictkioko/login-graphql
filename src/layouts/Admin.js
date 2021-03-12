@@ -9,8 +9,6 @@ import HeaderStats from "../components/Header/HeaderStats";
 
 // views
 import Dashboard from "../pages/admin/Dashboard.js";
-// import Target from "../pages/app/target.js";
-// import Stats from "../pages/app/stats.js";
 
 export default function Admin() {
   return (
@@ -23,8 +21,7 @@ export default function Admin() {
         <div className="px-4 md:px-10 mx-auto w-full -m-24">
           <Switch>
             <Route path="/admin/dashboard" exact component={Dashboard} />
-            {/* <Route path="/app/target" exact component={Target} />
-            <Route path="/app/stats" exact component={Stats} /> */}
+          
 
             <Redirect from="/admin" to="/admin/dashboard" />
           </Switch>
