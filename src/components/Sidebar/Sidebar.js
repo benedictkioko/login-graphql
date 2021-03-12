@@ -129,16 +129,16 @@ export default function Sidebar() {
                 <Link
                   className={
                     "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/app/stats") !== -1
+                    (window.location.href.indexOf("/app/statistics") !== -1
                       ? "text-red-500 hover:text-red-600"
                       : "text-gray-800 hover:text-gray-600")
                   }
-                  to="/app/stats"
+                  to="/app/statistics"
                 >
                   <i
                     className={
                       "fas fa-sort-numeric-up mr-2 text-sm " +
-                      (window.location.href.indexOf("/app/stats") !== -1
+                      (window.location.href.indexOf("/app/statistics") !== -1
                         ? "opacity-75"
                         : "text-gray-400")
                     }
