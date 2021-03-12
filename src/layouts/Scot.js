@@ -25,7 +25,7 @@ export default function Scot() {
         <div className="px-4 md:px-10 mx-auto w-full">
           <Switch>
             <Route path="/app/target" exact component={Target} />
-            <Route path="/app/stats" exact component={Stats} />
+            <Route path="/app/statistics" exact component={Stats} />
             <Route path="/app/asr" exact component={Asr} />
             <Route path="/app/exploitation" exact component={Exploitation} />
             <Route path="/app/spectrum" exact component={Spectrum} />
