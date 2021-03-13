@@ -1,10 +1,10 @@
 import { dashboard } from "../actions/actionTypes";
 
 const initialState = {
-  totalCountries: 11,
-  totalTargets: 12361,
-  totalDomains: 92705,
-  totalServices: 398,
+  totalCountries: "",
+  totalTargets: "",
+  totalDomains: "",
+  totalServices: "",
 };
 
 export default function dashboardReducer(state = initialState, action) {
@@ -12,7 +12,7 @@ export default function dashboardReducer(state = initialState, action) {
     case dashboard.GET_STATS_SUCCESS:
       const State = {
         ...state,
-        search: action.payload,
+        ...action.payload,
       };
       return State;
     default:
