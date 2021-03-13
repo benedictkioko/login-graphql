@@ -5,12 +5,11 @@ import { shallowEqual, useSelector } from "react-redux";
 
 import CardStats from "../Cards/CardStats.js";
 
-function HeaderStats(props) {
-  const state = useSelector((state) => state, shallowEqual);
+function HeaderStats() {
+  const state = useSelector((state) => state.dashStats, shallowEqual);
 
   useEffect(() => {
     if (state) {
-      console.log("header", state.dashboard.totalCountries);
     }
   }, [state]);
 
@@ -25,7 +24,7 @@ function HeaderStats(props) {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="COUNTRIES"
-                  statTitle={state.dashboard.totalCountries.toLocaleString()}
+                  statTitle={state.totalCountries.toLocaleString()}
                   statIconName="fas fa-map-marker-alt"
                   statIconColor="bg-red-500"
                 />
@@ -33,7 +32,7 @@ function HeaderStats(props) {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="TARGETS"
-                  statTitle={state.dashboard.totalTargets.toLocaleString()}
+                  statTitle={state.totalTargets.toLocaleString()}
                   statIconName="fas fa-network-wired"
                   statIconColor="bg-red-400"
                 />
@@ -41,7 +40,7 @@ function HeaderStats(props) {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="DOMAINS"
-                  statTitle={state.dashboard.totalDomains.toLocaleString()}
+                  statTitle={state.totalDomains.toLocaleString()}
                   statIconName="fas fa-sitemap"
                   statIconColor="bg-pink-500"
                 />
@@ -49,7 +48,7 @@ function HeaderStats(props) {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="SERVICES"
-                  statTitle={state.dashboard.totalServices.toLocaleString()}
+                  statTitle={state.totalServices.toLocaleString()}
                   statIconName="fas fa-server"
                   statIconColor="bg-green-500"
                 />
