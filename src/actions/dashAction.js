@@ -7,19 +7,3 @@ export const dashStats = (data) => {
     payload: data,
   };
 };
-
-// target
-export const fetchTarget = (data) => {
-  return {
-    type: dashboard.GET_TARGETS,
-    payload: data,
-  };
-};
-
-// search input
-export const setSearchQuery = (data) => {
-  return {
-    type: dashboard.SET_SEARCH_QUERY,
-    payload: data,
-  };
-};
