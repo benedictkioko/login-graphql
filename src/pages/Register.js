@@ -69,15 +69,15 @@ const Register = ({ history }) => {
     <div className="min-h-screen p-5 bg-gray-900 flex flex-col justify-center bg-fixed bg-hero-large-blue">
       <div className="max-w-md min-h-1/2 w-full mx-auto">
         <div className="max-w-md w-full mx-auto mt-4 p-8 bg-custom rounded">
-          <div class="rounded-t mb-0 px-6 py-6">
+          <div className="rounded-t mb-0 px-6 py-6">
             <div className="h-16 w-16 md:h-24 md:w-24 mx-auto rounded-full bg-white">
               <img src={logo} alt="logo" />
             </div>
             <div className="text-3xl font-bold text-white mt-2 text-center">
               Hello <span className="font-bold text-red-600">Cyber</span>
             </div>
-            <div class="text-center mt-2">
-              <h6 class="text-white text-sm font-bold">Sign up</h6>
+            <div className="text-center mt-2">
+              <h6 className="text-white text-sm font-bold">Sign up</h6>
             </div>
           </div>
           <form className="space-y-6" onSubmit={handleSubmit(handleRegister)}>
@@ -174,7 +174,7 @@ const Register = ({ history }) => {
               ) : null}
             </div>
             <div>
-              <label class="inline-flex items-center cursor-pointer">
+              <label className="inline-flex items-center cursor-pointer">
                 <input
                   ref={register({
                     required: true,
@@ -184,11 +184,11 @@ const Register = ({ history }) => {
                   type="checkbox"
                   className="form-checkbox text-gray-800 ml-1 w-5 h-5 ease-linear transition-all duration-150"
                 />
-                <span class="ml-2 text-sm font-semibold text-white">
+                <span className="ml-2 text-sm font-semibold text-white">
                   I agree with the{" "}
                   <a
                     href="#right-cyber"
-                    class="text-red-500"
+                    className="text-red-500"
                     checked={inputs.isChecked}
                     handleChange={handleCheck}
                   >
@@ -212,8 +212,8 @@ const Register = ({ history }) => {
             </div>
           </form>
         </div>
-        <div class="flex flex-wrap mt-6 items-center">
-          <div class="w-full text-center">
+        <div className="flex flex-wrap mt-6 items-center">
+          <div className="w-full text-center">
             <Link to="/login" className="text-gray-300">
               Already have an account?
             </Link>
