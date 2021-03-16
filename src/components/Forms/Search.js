@@ -1,5 +1,5 @@
 // import { setSearchQuery } from "../../actions/dashAction";
-import useForm from "../../util/Hooks/useForm";
+import useForm from "../../constants/useForm";
 
 export default function Form({ handleSearch }) {
   const { inputs, handleChange, resetForm, clearForm } = useForm({
@@ -9,8 +9,6 @@ export default function Form({ handleSearch }) {
   // handle submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    
   };
 
   return (
