@@ -1,20 +1,20 @@
 import { dashboard } from "../actions/actionTypes";
 
 const initialState = {
-  totalCountries: "",
-  totalTargets: "",
-  totalDomains: "",
-  totalServices: "",
+  totalCountries: 0,
+  totalTargets: 0,
+  totalDomains: 0,
+  totalServices: 0,
 };
 
 export default function dashboardReducer(state = initialState, action) {
   switch (action.type) {
     case dashboard.GET_STATS_SUCCESS:
-      const State = {
+      return {
         ...state,
         ...action.payload,
       };
-      return State;
+
     default:
       return state;
   }
