@@ -9,7 +9,7 @@ export default function Navbar() {
     <>
       {/* Navbar */}
       <nav className="absolute top-0 left-0 w-full z-10 bg-transparent md:flex-row md:flex-no-wrap md:justify-start flex items-center p-4">
-        <div className="w-full mx-autp items-center flex justify-between md:flex-no-wrap flex-wrap md:px-10 px-4">
+        <div className="w-full mx-autp items-center md:flex hidden justify-between md:flex-no-wrap  flex-wrap md:px-10 px-4">
           {/* Brand */}
           <Link
             to="/admin/dashboard"
@@ -32,7 +32,7 @@ export default function Navbar() {
               clipRule="evenodd"
             />
           </svg>
-          <span className="text-white text-sm uppercase hidden lg:inline-block font-semibold">
+          <span className="md:flex hidden text-white text-sm uppercase lg:inline-block font-semibold">
             {getLastItem(window.location.pathname).toUpperCase()}
           </span>
           {/* Greetings */}
