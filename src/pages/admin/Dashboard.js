@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback, useRef } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { useDispatch } from "react-redux";
+import { shallowEqual, useSelector } from "react-redux";
 
 //actions
 import { dashStats } from "../../actions/dashAction";
@@ -12,25 +13,26 @@ import AsnPortStats from "../../components/Cards/AsnPortStats";
 // graphql
 import { DASH_STATS } from "../../graphql/query/target";
 
-function Dashboard() {
+function Dashboard(props) {
+  const state = useSelector((state) => state.dashStats, shallowEqual);
   // dispatch actions
   const dispatch = useDispatch();
-
   const { data, error, loading } = useQuery(DASH_STATS, {
     fetchPolicy: "network-only",
   });
 
-  console.log(data, error, loading);
-
   useEffect(() => {
-    // check whether data exists
-    if (!loading && data) {
+    // TODO: checkfor state.dashStats, initally satte.dashStats should be null || an object if data is loaded
+    if (state.totalTargets === 0 && data) {
+      console.log("hello", data);
       dispatch(dashStats(data?.dashStats));
     }
-  }, [data, loading, dispatch]);
+  }, [data, state.totalTargets, dispatch]);
 
-  if (loading) return <p className="text-blue-500">Loading...</p>;
-  if (error) return <div>Error: {error.message}</div>;
+  // if (loading) return <p className="text-blue-500">Loading...</p>;
+  // if (error) return <div>Error: {error.message}</div>;
+  console.log("render..");
+
   return (
     <>
       <div className="min-h-screen flex flex-wrap">
