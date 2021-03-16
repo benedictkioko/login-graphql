@@ -23,6 +23,17 @@ function Target() {
   const targetPerPage = 10;
   const pagesVisted = pageNumber * targetPerPage;
 
+  const [inputs, setInputs] = useState({
+    search: "",
+    n: 100,
+    offset: 0,
+  });
+
+  // handle search form
+  const handleSearch = (e) => {
+    e.preventDefault();
+  };
+
   // get data from graphql
   const { data, loading } = useQuery(GET_TARGETS, {
     fetchPolicy: "network-only",
@@ -39,13 +50,10 @@ function Target() {
     }
   }, [data, loading]);
 
-  // const targetData = data?.allTargets;
-  // console.log("Targets", targetData);
-
   const displayTargets = targets
     .slice(pagesVisted, pagesVisted + targetPerPage)
     .map((target) => {
-      return <Body data={target} />;
+      return <Body key={target.id} data={target} />;
     });
 
   const pageCount = Math.ceil(targets.length / targetPerPage);
@@ -61,7 +69,7 @@ function Target() {
         <div className="w-full mx-auto">
           <div className="items-center">
             {/* Search Form */}
-            <Search />
+            <Search handleSearch={handleSearch} />
 
             {/* Search Results Table */}
             <div className="flex flex-col">
