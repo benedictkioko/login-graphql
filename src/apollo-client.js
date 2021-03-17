@@ -1,11 +1,31 @@
-import { createHttpLink } from "apollo-link-http";
-import ApolloClient from "apollo-client";
-import { InMemoryCache } from "apollo-cache-inmemory";
+import {
+  ApolloClient,
+  HttpLink,
+  ApolloLink,
+  InMemoryCache,
+  concat,
+} from "@apollo/client";
+
+const httpLink = new HttpLink({ uri: "http://localhost:8000/api/v1/" });
+
+const authMiddleware = new ApolloLink((operation, forward) => {
+  const token = localStorage.getItem("state");
+  // add the authorization to the headers
+  if (token) {
+    const jwt = JSON.parse(token)["auth"]["accessToken"];
+    operation.setContext({
+      headers: {
+        authorization: token ? `JWT ${jwt}` : "",
+      },
+    });
+  }
+
+  return forward(operation);
+});
 
 const client = new ApolloClient({
-  link: createHttpLink({ uri: "http://localhost:8000/api/v1/" }),
   cache: new InMemoryCache(),
-  credetials: "include",
+  link: concat(authMiddleware, httpLink),
 });
 
 export { client };
