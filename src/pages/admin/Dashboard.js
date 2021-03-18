@@ -1,7 +1,6 @@
 import React, { useEffect, useCallback, useRef } from "react";
 import { useQuery } from "@apollo/react-hooks";
-import { useDispatch } from "react-redux";
-import { shallowEqual, useSelector } from "react-redux";
+import { useDispatch, shallowEqual, useSelector } from "react-redux";
 
 //actions
 import { dashStats } from "../../actions/dashAction";
@@ -14,7 +13,7 @@ import AsnPortStats from "../../components/Cards/AsnPortStats";
 import { DASH_STATS } from "../../graphql/query/target";
 
 function Dashboard(props) {
-  const state = useSelector((state) => state.dashStats, shallowEqual);
+  const state = useSelector((state) => state.dashboard, shallowEqual);
   // dispatch actions
   const dispatch = useDispatch();
   const { data, error, loading } = useQuery(DASH_STATS, {
@@ -23,16 +22,11 @@ function Dashboard(props) {
 
   useEffect(() => {
     // TODO: checkfor state.dashStats, initally satte.dashStats should be null || an object if data is loaded
-    if (state.totalTargets === 0 && data) {
-      console.log("hello", data);
+    if (state.dashStats.totalCountries === 0 && data) {
+      // console.log("hello", data);
       dispatch(dashStats(data?.dashStats));
     }
-  }, [data, state.totalTargets, dispatch]);
-
-  // if (loading) return <p className="text-blue-500">Loading...</p>;
-  // if (error) return <div>Error: {error.message}</div>;
-  console.log("render..");
-
+  }, [data, state.dashStats.totalCountries, dispatch]);
   return (
     <>
       <div className="min-h-screen flex flex-wrap">
