@@ -3,8 +3,8 @@ import { target } from "./actionTypes";
 // target
 export const fetchTarget = (data) => {
   return {
-    type: target.GET_TARGETS,
-    payload: data,
+    type: target.GET_TARGETS_SUCCESS,
+    payload: data.allTargets,
   };
 };
 
