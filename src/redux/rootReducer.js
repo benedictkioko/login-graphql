@@ -7,7 +7,7 @@ import storage from "redux-persist/lib/storage";
 const rootReducer = combineReducers({
   key: "root",
   auth: authReducer,
-  dashStats: dashboardReducer,
+  dashboard: dashboardReducer,
   targets: targetReducer,
   storage: storage,
 });
