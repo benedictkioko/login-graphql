@@ -1,7 +1,7 @@
-import { dashboard } from "../actions/actionTypes";
+import { target } from "../actions/actionTypes";
 
 const initialState = {
-  allTargets: [],
+  allTargets: {},
   n: 50,
   offset: 0,
   search: "",
@@ -9,19 +9,13 @@ const initialState = {
 
 export default function targetReducer(state = initialState, action) {
   switch (action.type) {
-    case dashboard.SET_SEARCH_QUERY:
-      const newSearchState = {
+    case target.SET_SEARCH_QUERY:
+      return {
         ...state,
         search: action.payload,
       };
-      return newSearchState;
-    case dashboard.GET_TARGETS:
-      const newState = {
-        ...state,
-        ...action.payload,
-      };
-      return newState;
-    case dashboard.TARGET_QUERY_SUCCESS:
+
+    case target.GET_TARGETS_SUCCESS:
       return {
         ...state,
         allTargets: action.payload,
