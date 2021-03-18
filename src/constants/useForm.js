@@ -5,6 +5,7 @@ export default function useForm(initial = {}) {
   const [inputs, setInputs] = useState(initial);
 
   function handleChange(e) {
+    e.persist();
     let { value, name, type } = e.target;
     // avoid the form sending number as a string
     if (type === "number") {
