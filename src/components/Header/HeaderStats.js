@@ -6,7 +6,7 @@ import { shallowEqual, useSelector } from "react-redux";
 import CardStats from "../Cards/CardStats.js";
 
 function HeaderStats() {
-  const state = useSelector((state) => state.dashStats, shallowEqual);
+  const state = useSelector((state) => state.dashboard.dashStats, shallowEqual);
 
   useEffect(() => {
     if (state) {
