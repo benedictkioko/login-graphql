@@ -18,21 +18,9 @@ export const GET_TARGETS = gql`
       name
       ip
       target
-      status
-      notes
-      slug
-      date
-    }
-  }
-`;
-
-export const SEARCH_TARGETS = gql`
-  query searchTargets($n: Int!, $offset: Int!, $search: String!) {
-    allTargets(search: $search, n: $n, offset: $offset) {
-      id
-      name
-      ip
-      target
+      country {
+        country
+      }
       status
       notes
       slug
