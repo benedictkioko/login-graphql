@@ -1,16 +1,47 @@
-// import { setSearchQuery } from "../../actions/dashAction";
+import { useLazyQuery } from "@apollo/client";
+import { useDispatch, shallowEqual, useSelector } from "react-redux";
+
+// form hook
 import useForm from "../../constants/useForm";
 
-export default function Form({ handleSearch }) {
+// graphql
+import { GET_TARGETS } from "../../graphql/query/target";
+
+// action
+import { fetchTarget } from "../../actions/targetAction";
+
+export default function Form() {
+  const dispatch = useDispatch();
+  // state
+  const state = useSelector((state) => state.targets, shallowEqual);
+
+  // initialization
   const { inputs, handleChange, resetForm, clearForm } = useForm({
     search: "",
   });
 
+  const [allTargets, { data, loading, error }] = useLazyQuery(GET_TARGETS, {
+    variables: {
+      search: inputs.search,
+      n: 100,
+      offset: 0,
+    },
+    onCompleted: (data) => {
+      console.log("data ", data);
+      dispatch(fetchTarget(data));
+    },
+  });
+
+  // console.dir(state);
+  // console.log(data, error, loading);
+
   // handle submit
   const handleSubmit = (e) => {
     e.preventDefault();
+    allTargets();
   };
 
+  console.log("render..");
   return (
     <>
       <div className="w-full">
@@ -22,7 +53,7 @@ export default function Form({ handleSearch }) {
                   Search for a target
                 </h1>
                 <div className="text-center py-4">
-                  <form>
+                  <form onSubmit={handleSubmit}>
                     <div className=" max-w-md mx-auto p-1 pr-0 flex items-center">
                       <input
                         type="text"
