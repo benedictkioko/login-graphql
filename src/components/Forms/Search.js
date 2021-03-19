@@ -49,8 +49,8 @@ export default function Form() {
           <div className="container mx-24rounded  px-4">
             <div className="px-6 py-6">
               <div className="text-center mb-2">
-                <h1 className="font-bold text-sm text-grey-darkest leading-loose">
-                  Search for a target
+                <h1 className="font-normal text-sm text-grey-darkest leading-loose">
+                  Search for an entity
                 </h1>
                 <div className="text-center py-4">
                   <form onSubmit={handleSubmit}>
