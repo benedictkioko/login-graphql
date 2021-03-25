@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createPopper } from "@popperjs/core";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch, shallowEqual, useSelector } from "react-redux";
+import { useMutation } from "@apollo/react-hooks";
+import { LOGOUT_MUTATION } from "../../graphql/mutation/auth";
+import { userLogout } from "../../actions/authAction";
 
 const User = () => {
+  // state
+  const state = useSelector((state) => state, shallowEqual);
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
   const btnDropdownRef = React.createRef();
@@ -16,6 +22,28 @@ const User = () => {
   const closeDropdownPopover = () => {
     setDropdownPopoverShow(false);
   };
+
+  const [revokeToken] = useMutation(LOGOUT_MUTATION);
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  // Logout functionality
+  const handleLogOut = (e) => {
+    e.preventDefault();
+    localStorage.clear();
+    dispatch(userLogout());
+    history.push("/login");
+  };
+
+  // block going back to login once authenticated
+  // useEffect(() => {
+  //   if (state.auth.isAuthenticated) {
+  //     history.push("/admin/dashboard");
+  //   } else {
+  //     history.push("/login");
+  //   }
+  // }, [history, state]);
+
   return (
     <>
       <Link
@@ -33,7 +61,9 @@ const User = () => {
               alt="..."
               className="w-full rounded-full align-middle border-none shadow-lg bg-red-600"
               // src="https://ui-avatars.com/api/?format=svg"
-              src="https://ui-avatars.com/api/?name=Benedict+Kioko"
+              src={
+                "https://ui-avatars.com/api/?name=" + state.auth.user.username
+              }
             />
           </span>
         </div>
@@ -69,7 +99,7 @@ const User = () => {
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent hover:bg-gray-400 hover:text-white text-gray-900"
           }
-          onClick={(e) => e.preventDefault()}
+          onClick={handleLogOut}
         >
           Logout
         </Link>
