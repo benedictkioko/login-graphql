@@ -1,7 +1,9 @@
 import User from "../Dropdowns/User";
 import { Link } from "react-router-dom";
+import { shallowEqual, useSelector } from "react-redux";
 
 export default function Navbar() {
+  const user = useSelector((state) => state.auth.user, shallowEqual);
   const getLastItem = (thePath) =>
     thePath.substring(thePath.lastIndexOf("/") + 1);
 
@@ -38,7 +40,9 @@ export default function Navbar() {
           {/* Greetings */}
           <div className="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-3">
             <div className="relative flex w-full flex-wrap items-stretch">
-              <h3 className="text-white font-bold">Welcome,</h3>
+              <h3 className="text-white font-bold">
+                Welcome {user.username.toUpperCase()},
+              </h3>
             </div>
           </div>
           {/* User */}
