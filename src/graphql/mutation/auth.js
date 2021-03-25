@@ -5,6 +5,13 @@ export const LOGIN_MUTATION = gql`
     tokenAuth(username: $username, password: $password) {
       token
       refreshToken
+      user {
+        username
+        firstName
+        lastName
+        email
+        lastLogin
+      }
     }
   }
 `;
@@ -17,6 +24,14 @@ export const REGISTER_MUTATION = gql`
         username
         email
       }
+    }
+  }
+`;
+
+export const LOGOUT_MUTATION = gql`
+  mutation RevokeToken($refreshToken: String!) {
+    revokeToken(refreshToken: $refreshToken) {
+      revoked
     }
   }
 `;
