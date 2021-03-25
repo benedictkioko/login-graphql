@@ -4,6 +4,7 @@ const initialState = {
   accessToken: null,
   isAuthenticated: false,
   refreshToken: null,
+  user: null,
 };
 
 export default function authReducer(state = initialState, action) {
@@ -14,6 +15,7 @@ export default function authReducer(state = initialState, action) {
         accessToken: action.payload.tokenAuth.token,
         isAuthenticated: true,
         refreshToken: action.payload.tokenAuth.refreshToken,
+        user: action.payload.tokenAuth.user,
       };
     case auth.REGISTER_SUCCESS:
       return {
@@ -23,7 +25,7 @@ export default function authReducer(state = initialState, action) {
     case auth.LOGIN_FAIL:
     case auth.REGISTER_FAIL:
     case auth.LOGOUT_SUCCESS:
-      localStorage.removeItem("accessToken");
+      localStorage.clear();
 
       return {
         accessToken: null,
