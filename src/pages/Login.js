@@ -6,6 +6,8 @@ import { useDispatch, shallowEqual, useSelector } from "react-redux";
 import { LOGIN_MUTATION } from "../graphql/mutation/auth";
 import { userLogin } from "../actions/authAction";
 import { Link } from "react-router-dom";
+import { toast } from "react-toast";
+import { errMsg } from "../actions/errorAction";
 
 const Login = ({ history }) => {
   // react-hook-form
@@ -15,7 +17,7 @@ const Login = ({ history }) => {
     password: "",
     isSubmitted: false,
   });
-  const [tokenAuth] = useMutation(LOGIN_MUTATION);
+  const [tokenAuth, { data, loading, error }] = useMutation(LOGIN_MUTATION);
   const dispatch = useDispatch();
   const state = useSelector((state) => state, shallowEqual);
 
@@ -32,10 +34,15 @@ const Login = ({ history }) => {
     // e.preventDefault();
     tokenAuth({
       variables: { username: inputs.username, password: inputs.password },
-    }).then((res) => {
-      dispatch(userLogin(res.data));
-      history.push("/admin/dashboard");
-    });
+    })
+      .then((res) => {
+        dispatch(userLogin(res.data));
+        history.push("/admin/dashboard");
+        toast.success("Yeay! Logged in Successfully");
+      })
+      .catch((error) => {
+        error.graphQLErrors?.map(({ message }) => toast.error(`${message}`));
+      });
   };
 
   // block going back to login once authenticated
