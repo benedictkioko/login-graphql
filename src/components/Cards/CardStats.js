@@ -1,12 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-
+import Loader from "react-loader-spinner";
 export default function CardStats({
   statSubtitle,
   statTitle,
-  statArrow,
-  statPercent,
-  statPercentColor,
   statDescripiron,
   statIconName,
   statIconColor,
@@ -57,8 +54,8 @@ export default function CardStats({
 }
 
 CardStats.defaultProps = {
-  statSubtitle: "Domain",
-  statTitle: "350",
+  statSubtitle: "Stats",
+  statTitle: <Loader type="ThreeDots" height={20} width={20} />,
   statIconName: "far fa-chart-bar",
   statIconColor: "bg-red-500",
 };
@@ -66,14 +63,7 @@ CardStats.defaultProps = {
 CardStats.propTypes = {
   statSubtitle: PropTypes.string,
   statTitle: PropTypes.string,
-  statArrow: PropTypes.oneOf(["up", "down"]),
-  // statPercent: PropTypes.string,
-  // can be any of the text color utilities
-  // from tailwindcss
-  statPercentColor: PropTypes.string,
   statDescripiron: PropTypes.string,
   statIconName: PropTypes.string,
-  // can be any of the background color utilities
-  // from tailwindcss
   statIconColor: PropTypes.string,
 };
