@@ -5,6 +5,7 @@ import { useDispatch, shallowEqual, useSelector } from "react-redux";
 import { useMutation } from "@apollo/react-hooks";
 import { LOGOUT_MUTATION } from "../../graphql/mutation/auth";
 import { userLogout } from "../../actions/authAction";
+import { toast } from "react-toast";
 
 const User = () => {
   // state
@@ -33,6 +34,7 @@ const User = () => {
     localStorage.clear();
     dispatch(userLogout());
     history.push("/login");
+    toast.success("Logged out Successfully");
   };
 
   // block going back to login once authenticated
