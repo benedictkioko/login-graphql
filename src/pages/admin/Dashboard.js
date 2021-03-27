@@ -22,11 +22,11 @@ function Dashboard(props) {
 
   useEffect(() => {
     // TODO: checkfor state.dashStats, initally satte.dashStats should be null || an object if data is loaded
-    if (state.dashStats.totalCountries === 0 && data) {
+    if (state.dashStats === null && data) {
       // console.log("hello", data);
       dispatch(dashStats(data?.dashStats));
     }
-  }, [data, state.dashStats.totalCountries, dispatch]);
+  }, [data, state.dashStats, dispatch]);
   return (
     <>
       <div className="min-h-screen flex flex-wrap">
