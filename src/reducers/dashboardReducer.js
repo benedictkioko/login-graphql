@@ -1,12 +1,7 @@
 import { dashboard } from "../actions/actionTypes";
 
 const initialState = {
-  dashStats: {
-    totalCountries: 0,
-    totalTargets: 0,
-    totalDomains: 0,
-    totalServices: 0,
-  },
+  dashStats: null,
 };
 
 export default function dashboardReducer(state = initialState, action) {
