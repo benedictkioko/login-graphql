@@ -70,6 +70,15 @@ export default function Form() {
                         Search
                       </button>
                     </div>
+                    {error ? (
+                      <div className=" text-red-500 italic font-sm my-4">
+                        {error.graphQLErrors?.map(({ message }, i) => (
+                          <span key={i}>{message}</span>
+                        ))}
+                      </div>
+                    ) : (
+                      ""
+                    )}
                   </form>
                 </div>
               </div>
