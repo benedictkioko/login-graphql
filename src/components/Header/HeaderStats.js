@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { shallowEqual, useSelector } from "react-redux";
+import Loader from "react-loader-spinner";
 
 // components
 
@@ -7,11 +8,13 @@ import CardStats from "../Cards/CardStats.js";
 
 function HeaderStats() {
   const state = useSelector((state) => state.dashboard.dashStats, shallowEqual);
+  // // let store;
 
-  useEffect(() => {
-    if (state) {
-    }
-  }, [state]);
+  // useEffect(() => {
+  //   if (state !== null) {
+  //     store = state
+  //   }
+  // }, [state]);
 
   return (
     <>
@@ -24,7 +27,16 @@ function HeaderStats() {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="COUNTRIES"
-                  statTitle={state.totalCountries.toLocaleString()}
+                  {...(state !== null && {
+                    statTitle: state.totalCountries.toLocaleString(),
+                  })}
+                  // statTitle={
+                  //   state !== null ? (
+                  //     state.totalCountries.toLocaleString()
+                  //   ) : (
+                  //     <Loader type="ThreeDots" height={20} width={20} />
+                  //   )
+                  // }
                   statIconName="fas fa-map-marker-alt"
                   statIconColor="bg-red-500"
                 />
@@ -32,7 +44,9 @@ function HeaderStats() {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="TARGETS"
-                  statTitle={state.totalTargets.toLocaleString()}
+                  {...(state !== null && {
+                    statTitle: state.totalTargets.toLocaleString(),
+                  })}
                   statIconName="fas fa-network-wired"
                   statIconColor="bg-red-400"
                 />
@@ -40,7 +54,9 @@ function HeaderStats() {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="DOMAINS"
-                  statTitle={state.totalDomains.toLocaleString()}
+                  {...(state !== null && {
+                    statTitle: state.totalDomains.toLocaleString(),
+                  })}
                   statIconName="fas fa-sitemap"
                   statIconColor="bg-pink-500"
                 />
@@ -48,7 +64,9 @@ function HeaderStats() {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="SERVICES"
-                  statTitle={state.totalServices.toLocaleString()}
+                  {...(state !== null && {
+                    statTitle: state.totalServices.toLocaleString(),
+                  })}
                   statIconName="fas fa-server"
                   statIconColor="bg-green-500"
                 />
