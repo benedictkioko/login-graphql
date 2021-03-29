@@ -12,6 +12,6 @@ export const userRegister = (data) => ({
   payload: data,
 });
 
-export const userLogout = (data) => ({
+export const userLogout = () => ({
   type: auth.LOGOUT_SUCCESS,
 });
