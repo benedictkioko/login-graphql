@@ -37,7 +37,6 @@ module.exports = {
     colors: {
       transparent: "transparent",
       current: "currentColor",
-
       black: colors.black,
       white: colors.white,
       gray: colors.coolGray,
@@ -567,7 +566,7 @@ module.exports = {
     placeholderColor: (theme) => theme("colors"),
     placeholderOpacity: (theme) => theme("opacity"),
     ringColor: (theme) => ({
-      DEFAULT: theme("colors.blue.500", "#3b82f6", "colors.gray.500"),
+      DEFAULT: theme("colors.red.500", "#3b82f6", "colors.gray.500"),
       ...theme("colors"),
     }),
     ringOffsetColor: (theme) => theme("colors"),
