@@ -11,7 +11,11 @@ export const fetchTarget = (data) => {
 // search input
 export const setSearchQuery = (data) => {
   return {
-    type: target.SET_SEARCH_QUERY,
+    type: target.SEARCH_QUERY,
     payload: data,
   };
 };
+// Reset target state
+export const resetQuery = () => ({
+  type: target.RESET_QUERY,
+});
