@@ -55,7 +55,7 @@ export default function CardStats({
 
 CardStats.defaultProps = {
   statSubtitle: "Stats",
-  statTitle: <Loader type="ThreeDots" height={20} width={20} />,
+  statTitle: <Loader type="ThreeDots" height={28} width={28} />,
   statIconName: "far fa-chart-bar",
   statIconColor: "bg-red-500",
 };
