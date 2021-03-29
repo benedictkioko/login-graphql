@@ -1,15 +1,15 @@
 import { target } from "../actions/actionTypes";
 
 const initialState = {
-  allTargets: {},
-  n: 50,
+  allTargets: null,
+  n: 100,
   offset: 0,
-  search: "",
+  search: null,
 };
 
 export default function targetReducer(state = initialState, action) {
   switch (action.type) {
-    case target.SET_SEARCH_QUERY:
+    case target.SEARCH_QUERY:
       return {
         ...state,
         search: action.payload,
@@ -20,6 +20,9 @@ export default function targetReducer(state = initialState, action) {
         ...state,
         allTargets: action.payload,
       };
+
+    case target.RESET_QUERY:
+      return initialState;
 
     default:
       return state;
