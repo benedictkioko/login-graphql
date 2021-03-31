@@ -13,7 +13,7 @@ export default function errorReducer(state = initialState, action) {
         ...state,
         ...action.payload,
       };
-    case error.RESER_ERROR:
+    case error.RESET_ERRORS:
       return initialState;
 
     default:
