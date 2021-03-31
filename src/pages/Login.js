@@ -7,7 +7,6 @@ import { LOGIN_MUTATION } from "../graphql/mutation/auth";
 import { userLogin } from "../actions/authAction";
 import { Link } from "react-router-dom";
 import { toast } from "react-toast";
-import { errMsg } from "../actions/errorAction";
 
 const Login = ({ history }) => {
   // react-hook-form
@@ -42,6 +41,9 @@ const Login = ({ history }) => {
       })
       .catch((error) => {
         error.graphQLErrors?.map(({ message }) => toast.error(`${message}`));
+        if (error.networkError) {
+          toast.error(`${error.networkError}`);
+        }
       });
   };
 
