@@ -8,6 +8,6 @@ export const errMsg = (errors) => {
   };
 };
 
-export const resetErrors = () => ({
-  type: error.RESER_ERROR,
+export const resetErrors = (errors) => ({
+  type: error.RESET_ERRORS,
 });
