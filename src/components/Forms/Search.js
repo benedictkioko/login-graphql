@@ -35,22 +35,15 @@ export default function Form() {
     },
     onCompleted: (data) => {
       dispatch(resetQuery());
-      dispatch(resetErrors());
+      errorStore.message && dispatch(resetErrors());
       dispatch(setSearchQuery(inputs.search));
       dispatch(fetchTarget(data));
     },
     onError: (error) => {
-      console.log(
-        error.graphQLErrors[0].message,
-        error.graphQLErrors[0].path[0]
-      );
       dispatch(setSearchQuery(inputs.search));
       dispatch(errMsg(error));
     },
   });
-
-  // console.dir(state);
-  // console.log(data, error, loading);
 
   // handle submit
   const handleSubmit = (e) => {
@@ -69,7 +62,7 @@ export default function Form() {
                 <h1 className="font-normal text-sm text-grey-darkest leading-loose">
                   Search for an entity
                 </h1>
-                <div className="text-center py-4">
+                <div className="text-center py-2">
                   <form onSubmit={handleSubmit}>
                     <div className=" max-w-md mx-auto p-1 pr-0 flex items-center">
                       <input
@@ -97,14 +90,8 @@ export default function Form() {
                       </div>
                     )}
                     {errorStore ? (
-                      <div className=" text-red-500 italic font-sm my-4">
+                      <div className=" text-red-500 italic font-sm mb-4">
                         <span>{errorStore.message}</span>
-                        {/* {error.graphQLErrors?.map(
-                          ({ message }, i) => (
-                            <span key={i}>{message}</span>
-                          )
-                          // dispatch(errMsg(message))
-                        )} */}
                       </div>
                     ) : (
                       ""
