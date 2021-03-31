@@ -23,5 +23,5 @@ export const target = {
 
 export const error = {
   ERROR_MESSAGE: "ERROR_MESSAGE",
-  RESER_ERROR: "RESER_ERROR"
+  RESET_ERRORS: "RESET_ERRORS",
 };
