@@ -27,16 +27,7 @@ function HeaderStats() {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="COUNTRIES"
-                  {...(state !== null && {
-                    statTitle: state.totalCountries.toLocaleString(),
-                  })}
-                  // statTitle={
-                  //   state !== null ? (
-                  //     state.totalCountries.toLocaleString()
-                  //   ) : (
-                  //     <Loader type="ThreeDots" height={20} width={20} />
-                  //   )
-                  // }
+                  statTitle={state?.totalCountries.toLocaleString()}
                   statIconName="fas fa-map-marker-alt"
                   statIconColor="bg-red-500"
                 />
@@ -44,9 +35,7 @@ function HeaderStats() {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="TARGETS"
-                  {...(state !== null && {
-                    statTitle: state.totalTargets.toLocaleString(),
-                  })}
+                  statTitle={state?.totalTargets.toLocaleString()}
                   statIconName="fas fa-network-wired"
                   statIconColor="bg-red-400"
                 />
@@ -54,9 +43,7 @@ function HeaderStats() {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="DOMAINS"
-                  {...(state !== null && {
-                    statTitle: state.totalDomains.toLocaleString(),
-                  })}
+                  statTitle={state?.totalDomains.toLocaleString()}
                   statIconName="fas fa-sitemap"
                   statIconColor="bg-pink-500"
                 />
@@ -64,9 +51,7 @@ function HeaderStats() {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="SERVICES"
-                  {...(state !== null && {
-                    statTitle: state.totalServices.toLocaleString(),
-                  })}
+                  statTitle={state?.totalServices.toLocaleString()}
                   statIconName="fas fa-server"
                   statIconColor="bg-green-500"
                 />

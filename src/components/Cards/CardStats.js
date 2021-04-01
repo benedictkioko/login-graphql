@@ -7,6 +7,7 @@ export default function CardStats({
   statDescripiron,
   statIconName,
   statIconColor,
+  loader,
 }) {
   return (
     <>
@@ -18,7 +19,7 @@ export default function CardStats({
                 {statSubtitle}
               </h5>
               <span className="font-semibold text-xl text-gray-800">
-                {statTitle}
+                {statTitle ? statTitle : loader}
               </span>
             </div>
             <div className="relative w-auto pl-4 flex-initial">
@@ -55,9 +56,10 @@ export default function CardStats({
 
 CardStats.defaultProps = {
   statSubtitle: "Stats",
-  statTitle: <Loader type="ThreeDots" height={28} width={28} />,
+  statTitle: "",
   statIconName: "far fa-chart-bar",
   statIconColor: "bg-red-500",
+  loader: <Loader type="ThreeDots" height={28} width={28} />,
 };
 
 CardStats.propTypes = {
