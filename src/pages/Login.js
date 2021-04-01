@@ -112,7 +112,7 @@ const Login = ({ history }) => {
                 placeholder="Password"
                 name="password"
               />
-              {errors.username && (
+              {errors.password && (
                 <p className="text-sm text-red-600">Enter a valid password</p>
               )}
             </div>
