@@ -6,16 +6,13 @@ import { client } from "./apollo-client";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import { ToastContainer } from "react-toast";
+import "./index.css";
 
 ReactDOM.render(
   <ApolloProvider client={client}>
     <Provider store={store}>
+      <ToastContainer delay={5000} position="top-right" />
       <App />
-      <ToastContainer
-        delay={5000}
-        position="top-right"
-        style={{ "padding-top": "2vh" }}
-      />
     </Provider>
   </ApolloProvider>,
   document.getElementById("root")
