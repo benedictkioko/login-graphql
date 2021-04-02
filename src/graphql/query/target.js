@@ -28,3 +28,15 @@ export const GET_TARGETS = gql`
     }
   }
 `;
+
+export const GET_SEARCH_ENGINE_RESULTS = gql`
+  query searchEngineResults($search: String!) {
+    searchApi(query: $search) {
+      results {
+        title
+        url
+        description
+      }
+    }
+  }
+`;
