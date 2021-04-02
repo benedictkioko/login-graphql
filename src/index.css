@@ -1,0 +1,9 @@
+.toastContainer {
+  overflow: hidden;
+  overflow-x: auto;
+  display: grid;
+  grid-gap: 20px;
+  position: fixed;
+  user-select: none;
+  z-index: 15;
+}
