@@ -5,7 +5,7 @@ export default function TargetDefination() {
   return (
     <>
       <div className="w-full">
-        <h1 className="font-bold text-sm text-green-600 leading-loose my-3 pb-4">
+        <h1 className="font-bold text-sm text-green-600 leading-loose pb-4">
           Add Target
         </h1>
         <div className="items-center justify-center">

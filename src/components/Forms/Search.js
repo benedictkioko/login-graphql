@@ -14,12 +14,12 @@ import {
   fetchTarget,
   resetQuery,
   setSearchQuery,
-} from "../../actions/targetAction";
+} from "../../actions/asrAction";
 
 export default function Form() {
   const dispatch = useDispatch();
   // state
-  const state = useSelector((state) => state.targets, shallowEqual);
+  const state = useSelector((state) => state.asr, shallowEqual);
   const errorStore = useSelector((state) => state.error, shallowEqual);
 
   // initialization

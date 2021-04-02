@@ -11,7 +11,7 @@ export const dashboard = {
   GET_STATS_FAIL: "GET_STATS_FAIL",
 };
 
-export const target = {
+export const asr = {
   TARGET_CREATE_SUCCESS: "TARGET_CREATE_SUCCESS",
   TARGET_CREATE_FAIL: "TARGET_CREATE_FAIL",
   GET_TARGETS_SUCCESS: "GET_TARGETS_SUCCESS",
