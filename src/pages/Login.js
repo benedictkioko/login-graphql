@@ -9,6 +9,8 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toast";
 
 const Login = ({ history }) => {
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state, shallowEqual);
   // react-hook-form
   const { register, handleSubmit, errors } = useForm({ mode: "onChange" });
   const [inputs, setInputs] = useState({
@@ -17,8 +19,6 @@ const Login = ({ history }) => {
     isSubmitted: false,
   });
   const [tokenAuth, { data, loading, error }] = useMutation(LOGIN_MUTATION);
-  const dispatch = useDispatch();
-  const state = useSelector((state) => state, shallowEqual);
 
   const handleChange = (e) => {
     e.persist();
@@ -37,12 +37,12 @@ const Login = ({ history }) => {
       .then((res) => {
         dispatch(userLogin(res.data));
         history.push("/admin/dashboard");
-        toast.success("Yeay! Logged in Successfully");
+        toast.success("Logged in Successfully.");
       })
       .catch((error) => {
         error.graphQLErrors?.map(({ message }) => toast.error(`${message}`));
         if (error.networkError) {
-          toast.error(`${error.networkError}`);
+          toast.error(`${error.networkError}.`);
         }
       });
   };
