@@ -1,7 +1,50 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useMutation } from "@apollo/react-hooks";
+import { toast } from "react-toast";
 
-export default function TargetDefination() {
+// custom hook
+import useForm from "../../constants/useForm";
+
+// graphql
+import { CREATE_TARGET_MUTATION } from "../../graphql/mutation/target";
+import { errMsg } from "../../actions/errorAction";
+
+function TargetDefination() {
+  const dispatch = useDispatch();
+
+  // initialization
+  const { inputs, handleChange, resetForm, clearForm } = useForm({
+    name: "",
+    target: "",
+    sector: {
+      id: null,
+    },
+    ip: "",
+    country: {
+      id: null,
+    },
+    notes: "",
+    status: "Up",
+    lat: 0,
+    lng: 0,
+  });
+
+  const [createTarget, { data, loading, error }] = useMutation(
+    CREATE_TARGET_MUTATION,
+    {
+      variables: {
+        search: inputs.search,
+        n: 100,
+        offset: 0,
+      },
+      onCompleted: (data) => {},
+      onError: (error) => {
+        dispatch(errMsg(error));
+      },
+    }
+  );
+
   return (
     <>
       <div className="w-full">
@@ -53,7 +96,10 @@ export default function TargetDefination() {
                           className="block uppercase tracking-wide text-grey-darker text-xs font-bold pb-4"
                           htmlFor="grid-last-name"
                         >
-                          IP Address
+                          IP Address{" "}
+                          <span className="text-sm italic text-gray-500">
+                            (Optional)
+                          </span>
                         </label>
                         <input
                           className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-2 px-4 focus:outline-none focus:bg-white focus:border-gray-500"
@@ -180,3 +226,19 @@ export default function TargetDefination() {
     </>
   );
 }
+
+// function getGEO(domain, target, defineTarget, context) {
+function getGEO(domain) {
+  var url = "https://api.hackertarget.com/geoip/?q=" + domain;
+  return fetch(url)
+    .then((response) => response.text())
+    .then((text) => {
+      var str = text.replace(/\r\n/g, "\r").replace(/\n/g, "\r").split(/\r/);
+      var lat = str[4].split(" ")[1];
+      var lng = str[5].split(" ")[1];
+      // defineTarget({ ...target, lat: lat, lng: lng });
+    })
+    .catch((e) => toast.error("error", "Unable to get targets location"));
+}
+
+export default TargetDefination;
