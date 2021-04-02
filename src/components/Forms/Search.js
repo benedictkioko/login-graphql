@@ -59,7 +59,7 @@ export default function Form() {
           <div className="container mx-24rounded  px-4">
             <div className="px-6 py-2">
               <div className="text-center mb-2">
-                <h1 className="font-normal text-sm text-grey-darkest leading-loose">
+                <h1 className="text-sm font-medium text-gray-900 leading-loose">
                   Search for an entity
                 </h1>
                 <div className="text-center py-2">
@@ -79,10 +79,30 @@ export default function Form() {
                       />
                       <button
                         type="submit"
-                        className="appearance-none bg-teal-500 text-white hover:bg-teal-800 text-md font-semibold tracking-wide uppercase p-2 rounded shadow hover:bg-indigo-light"
+                        className="appearance-none bg-teal-700 text-white hover:bg-teal-800 text-md font-semibold tracking-wide uppercase p-2 rounded shadow hover:bg-indigo-light"
                       >
                         Search
                       </button>
+                    </div>
+                    <div className="flex justify-center mt-4">
+                      <button
+                        type="button"
+                        className="bg-gray-200 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        aria-pressed="false"
+                        aria-labelledby="annual-billing-label"
+                      >
+                        <span className="sr-only">Use setting</span>
+                        <span
+                          aria-hidden="true"
+                          className="translate-x-0 pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200"
+                        ></span>
+                      </button>
+                      <span className="ml-3" id="annual-billing-label">
+                        <span className="text-sm font-medium text-gray-900">
+                          View search engine results{" "}
+                        </span>
+                        <span className="text-sm text-gray-500">(Google)</span>
+                      </span>
                     </div>
                     {loading && (
                       <div className="flex justify-center">
@@ -90,7 +110,7 @@ export default function Form() {
                       </div>
                     )}
                     {errorStore ? (
-                      <div className=" text-red-500 italic font-sm mb-4">
+                      <div className=" text-red-500 italic font-sm my-4">
                         <span>{errorStore.message}</span>
                       </div>
                     ) : (
