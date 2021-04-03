@@ -22,6 +22,11 @@ import Profile from "./pages/Profile";
 import Admin from "./layouts/Admin";
 import Scot from "./layouts/Scot";
 
+// redux actions
+import { fetchSectors, fetchCountries } from "./actions/dashAction";
+import { gql } from "apollo-boost";
+import { useQuery } from "@apollo/react-hooks";
+
 const BrowserHistory = createBrowserHistory();
 
 const App = (props) => {
@@ -59,6 +64,50 @@ const App = (props) => {
       </div>
     </Router>
   );
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    sectors: (sectors) => dispatch(fetchSectors(sectors)),
+    countries: (countries) => dispatch(fetchCountries(countries)),
+  };
+};
+
+const categoryQuery = gql`
+  {
+    allCategories {
+      id
+      category
+    }
+  }
+`;
+
+const countryQuery = gql`
+  {
+    allCountries {
+      id
+      country
+    }
+  }
+`;
+
+const Load = (props) => {
+  const { data: countryData } = useQuery(countryQuery, {
+    onCompleted(countryData) {
+      if (countryData) {
+        props.fetchCountries(countryData.allCountries);
+      }
+    },
+  });
+  const { data: sectorData } = useQuery(categoryQuery, {
+    onCompleted(sectorData) {
+      if (sectorData) {
+        // console.log(sectorData);
+        props.fetchSectors(sectorData.allCategories);
+      }
+    },
+  });
+
+  return null;
 };
 
 const mapStateToProps = (state) => ({
