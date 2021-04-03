@@ -2,6 +2,8 @@ import { dashboard } from "../actions/actionTypes";
 
 const initialState = {
   dashStats: null,
+  sectors: null,
+  countries: null,
 };
 
 export default function dashboardReducer(state = initialState, action) {
@@ -10,6 +12,18 @@ export default function dashboardReducer(state = initialState, action) {
       return {
         ...state,
         dashStats: action.payload,
+      };
+
+    case dashboard.GET_SECTORS_SUCESS:
+      return {
+        ...state,
+        sectors: action.payload,
+      };
+
+    case dashboard.GET_COUNTRIES_SUCCESS:
+      return {
+        ...state,
+        coutries: action.payload,
       };
 
     default:
