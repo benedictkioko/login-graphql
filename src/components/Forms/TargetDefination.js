@@ -10,7 +10,7 @@ import useForm from "../../constants/useForm";
 import { CREATE_TARGET_MUTATION } from "../../graphql/mutation/target";
 import { errMsg } from "../../actions/errorAction";
 
-function TargetDefination() {
+function TargetDefination({ history }) {
   const dispatch = useDispatch();
 
   // initialization
@@ -18,32 +18,41 @@ function TargetDefination() {
     name: "",
     target: "",
     sector: {
-      id: null,
+      id: 1,
     },
     ip: "",
     country: {
-      id: null,
+      id: 1,
     },
     notes: "",
     status: "Up",
     lat: 0,
     lng: 0,
+    isSubmitted: false,
   });
 
   const [createTarget, { data, loading, error }] = useMutation(
-    CREATE_TARGET_MUTATION,
-    {
-      variables: {
-        search: inputs.search,
-        n: 100,
-        offset: 0,
-      },
-      onCompleted: (data) => {},
-      onError: (error) => {
-        dispatch(errMsg(error));
-      },
-    }
+    CREATE_TARGET_MUTATION
   );
+
+  // Login functionality
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    createTarget({
+      variables: { name: inputs.name, target: inputs.domain },
+    })
+      .then((res) => {
+        // dispatch(userLogin(res.data));
+        history.push("/admin/dashboard");
+        toast.success("Target addded successfully.");
+      })
+      .catch((error) => {
+        error.graphQLErrors?.map(({ message }) => toast.error(`${message}`));
+        if (error.networkError) {
+          toast.error(`${error.networkError}.`);
+        }
+      });
+  };
 
   return (
     <>
@@ -56,19 +65,18 @@ function TargetDefination() {
             <div className="px-12 py-6">
               <div className="text-center mb-4">
                 <div className="max-w-md items-center text-left py-4">
-                  <form action="#">
+                  <form onSubmit={handleSubmit}>
                     <div className="-mx-3 md:flex mb-6">
                       <div className="md:w-full px-3">
-                        <label
-                          className="block uppercase tracking-wide text-grey-darker text-xs font-bold pb-4"
-                          htmlFor="grid-password"
-                        >
+                        <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold pb-4">
                           Entity
                         </label>
                         <input
                           className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-2 px-4 mb-3 focus:outline-none focus:bg-white focus:border-gray-500"
-                          id="grid-password"
                           type="text"
+                          name="name"
+                          value={inputs.name}
+                          onChange={handleChange}
                           placeholder=""
                         />
                         <p className="text-grey-dark text-xs italic">
@@ -78,33 +86,28 @@ function TargetDefination() {
                     </div>
                     <div className="-mx-3 md:flex  py-2">
                       <div className="md:w-1/2 px-3  md:mb-0">
-                        <label
-                          className="block uppercase tracking-wide text-grey-darker text-xs font-bold pb-4"
-                          htmlFor="grid-first-name"
-                        >
+                        <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold pb-4">
                           Domain
                         </label>
                         <input
                           className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-2 px-4 mb-3 focus:outline-none focus:bg-white focus:border-gray-500"
-                          id="grid-first-name"
                           type="text"
+                          name="target"
+                          value={inputs.target}
+                          onChange={handleChange}
                           placeholder="domain.com"
                         />
                       </div>
                       <div className="md:w-1/2 px-3">
-                        <label
-                          className="block uppercase tracking-wide text-grey-darker text-xs font-bold pb-4"
-                          htmlFor="grid-last-name"
-                        >
-                          IP Address{" "}
-                          <span className="text-sm italic text-gray-500">
-                            (Optional)
-                          </span>
+                        <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold pb-4">
+                          IP Address
                         </label>
                         <input
                           className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-2 px-4 focus:outline-none focus:bg-white focus:border-gray-500"
-                          id="grid-last-name"
                           type="text"
+                          name="ip"
+                          value={inputs.ip}
+                          onChange={handleChange}
                           placeholder="192.168.0.1"
                         />
                       </div>
@@ -112,10 +115,7 @@ function TargetDefination() {
                     {/* sector */}
                     <div className="-mx-3 md:flex mb-6">
                       <div className="md:w-full px-3">
-                        <label
-                          className="block uppercase tracking-wide text-grey-darker text-xs font-bold pb-4"
-                          htmlFor="grid-state"
-                        >
+                        <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold pb-4">
                           Sector
                         </label>
                         <div className="relative">
@@ -139,34 +139,16 @@ function TargetDefination() {
                     </div>
                     {/* country */}
                     <div className="-mx-3 md:flex mb-2">
-                      <div className="md:w-1/2 px-3 mb-6 md:mb-0">
-                        <label
-                          className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2 pb-4"
-                          htmlFor="grid-city"
-                        >
-                          City
-                        </label>
-                        <input
-                          className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-2 px-4"
-                          id="grid-city"
-                          type="text"
-                          placeholder="Nairobi"
-                        />
-                      </div>
-
-                      <div className="md:w-1/2 px-3">
-                        <label
-                          className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2 pb-4"
-                          htmlFor="grid-state"
-                        >
+                      <div className="md:w-full px-3">
+                        <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold pb-4">
                           Country
                         </label>
                         <div className="relative">
                           <select className="appearance-none h-full rounded-l border block w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                             <option>-Choose-</option>
-                            <option>Uganda</option>
-                            <option>Kenya</option>
-                            <option>Somalia</option>
+                            <option>Agriculture</option>
+                            <option>Banking</option>
+                            <option>ICT</option>
                           </select>
                           <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 m-4 text-gray-700">
                             <svg
