@@ -9,6 +9,8 @@ export const auth = {
 export const dashboard = {
   GET_STATS_SUCCESS: "GET_STATS_SUCCESS",
   GET_STATS_FAIL: "GET_STATS_FAIL",
+  GET_SECTORS_SUCESS: "GET_SECTORS_SUCESS",
+  GET_COUNTRIES_SUCCESS: "GET_COUNTRIES_SUCCESS",
 };
 
 export const asr = {
