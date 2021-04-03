@@ -7,3 +7,19 @@ export const dashStats = (data) => {
     payload: data,
   };
 };
+
+// sectors
+export const fetchSectors = (data) => {
+  return {
+    type: dashboard.GET_SECTORS_SUCESS,
+    payload: data,
+  };
+};
+
+// countries
+export const fetchCountries = (data) => {
+  return {
+    type: dashboard.GET_COUNTRIES_SUCCESS,
+    payload: data,
+  };
+};
