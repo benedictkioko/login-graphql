@@ -6,7 +6,7 @@ import {
   Switch,
 } from "react-router-dom";
 import { connect } from "react-redux";
-import { useSelector, shallowEqual } from "react-redux";
+import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { createBrowserHistory } from "history";
 
 // css
@@ -26,11 +26,22 @@ import Scot from "./layouts/Scot";
 import { fetchSectors, fetchCountries } from "./actions/dashAction";
 import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/react-hooks";
+import { userLogout } from "./actions/authAction";
+import { toast } from "react-toast";
 
 const BrowserHistory = createBrowserHistory();
 
 const App = (props) => {
+  const dispatch = useDispatch();
   const state = useSelector((state) => state, shallowEqual);
+
+  // if (state.error.message === "Signature has expired") {
+  //   localStorage.clear();
+  //   dispatch(userLogout());
+  //   // props.history.push("/login");
+  //   <Redirect to={{ pathname: "/login" }} />;
+  //   toast.success("Logged out Successfully");
+  // }
 
   const PrivateRoute = ({ component: Component, ...rest }) => {
     return (
@@ -64,50 +75,6 @@ const App = (props) => {
       </div>
     </Router>
   );
-};
-const mapDispatchToProps = (dispatch) => {
-  return {
-    sectors: (sectors) => dispatch(fetchSectors(sectors)),
-    countries: (countries) => dispatch(fetchCountries(countries)),
-  };
-};
-
-const categoryQuery = gql`
-  {
-    allCategories {
-      id
-      category
-    }
-  }
-`;
-
-const countryQuery = gql`
-  {
-    allCountries {
-      id
-      country
-    }
-  }
-`;
-
-const Load = (props) => {
-  const { data: countryData } = useQuery(countryQuery, {
-    onCompleted(countryData) {
-      if (countryData) {
-        props.fetchCountries(countryData.allCountries);
-      }
-    },
-  });
-  const { data: sectorData } = useQuery(categoryQuery, {
-    onCompleted(sectorData) {
-      if (sectorData) {
-        // console.log(sectorData);
-        props.fetchSectors(sectorData.allCategories);
-      }
-    },
-  });
-
-  return null;
 };
 
 const mapStateToProps = (state) => ({
