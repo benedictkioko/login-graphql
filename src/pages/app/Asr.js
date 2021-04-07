@@ -50,7 +50,7 @@ function Asr() {
     },
     fetchPolicy: "network-only",
     onCompleted: (data) => {
-      console.log("serach engine", data);
+      console.log("search engine", data);
     },
   });
 
@@ -150,21 +150,6 @@ function Asr() {
                               "border border-teal-500 bg-teal-500 text-white block rounded-sm font-bold py-2 px-2 ml-2"
                             }
                           />
-                          <div className=" flex flex-col mt-2">
-                            <button className="inline-flex items-center justify-center w-100 h-10 mr-2 px-4 text-indigo-100 transition-colors duration-150 bg-teal-700 rounded-lg focus:shadow-outline hover:bg-indigo-800">
-                              Add New Target
-                              <svg
-                                className="w-4 h-4 fill-current"
-                                viewBox="0 0 20 20"
-                              >
-                                <path
-                                  d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
-                                  clipRule="evenodd"
-                                  fillRule="evenodd"
-                                ></path>
-                              </svg>
-                            </button>
-                          </div>
                         </div>
                       </div>
                     </div>
