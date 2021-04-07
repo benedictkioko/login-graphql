@@ -13,6 +13,7 @@ import Stats from "../pages/app/Stats";
 import Asr from "../pages/app/Asr";
 import Exploitation from "../pages/app/Exploitation";
 import Spectrum from "../pages/app/Spectrum";
+import TargetDetails from "../pages/app/TargetDetails";
 
 export default function Scot() {
   return (
@@ -27,6 +28,11 @@ export default function Scot() {
             <Route path="/app/target" exact component={Target} />
             <Route path="/app/statistics" exact component={Stats} />
             <Route path="/app/asr" exact component={Asr} />
+            <Route
+              path="/app/asr/attack-surface/:id"
+              exact
+              component={TargetDetails}
+            />
             <Route path="/app/exploitation" exact component={Exploitation} />
             <Route path="/app/spectrum" exact component={Spectrum} />
 
