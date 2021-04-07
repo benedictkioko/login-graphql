@@ -15,6 +15,12 @@ export default function Header() {
             scope="col"
             className="px-6 py-3 text-left text-xs font-bold text-gray-900 uppercase tracking-wider"
           >
+            Country
+          </th>
+          <th
+            scope="col"
+            className="px-6 py-3 text-left text-xs font-bold text-gray-900 uppercase tracking-wider"
+          >
             Domain
           </th>
           <th
