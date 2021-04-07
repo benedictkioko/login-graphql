@@ -57,16 +57,20 @@ function HeaderStats() {
                 />
               </div>
             </div>
-            <div className="w-full flex flex-wrap p-4">
-              <p className="text-2xl text-white py-4">
-                Currently Analyzing
-                <span className="text-green-600 text-2xl py-4">
-                  {" "}
-                  2,756,463{" "}
-                </span>
-                ASSETS
-              </p>
-            </div>
+            {state !== null ? (
+              <div className="w-full flex flex-wrap p-4">
+                <p className="text-2xl text-white py-4">
+                  Currently Analyzing
+                  <span className="text-green-600 text-2xl py-4">
+                    {" "}
+                    {state?.totalsAssets.toLocaleString()}{" "}
+                  </span>
+                  ASSETS
+                </p>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>
