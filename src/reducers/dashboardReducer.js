@@ -23,7 +23,7 @@ export default function dashboardReducer(state = initialState, action) {
     case dashboard.GET_COUNTRIES_SUCCESS:
       return {
         ...state,
-        coutries: action.payload,
+        countries: action.payload,
       };
 
     default:
