@@ -7,6 +7,7 @@ export const DASH_STATS = gql`
       totalTargets
       totalDomains
       totalServices
+      totalsAssets
     }
   }
 `;
@@ -49,6 +50,8 @@ export const FETCH_TARGET_DETAILS = gql`
       target
       asn
       ip
+      lat
+      lng
       sector {
         id
         category
