@@ -1,6 +1,7 @@
 import User from "../Dropdowns/User";
 import { Link } from "react-router-dom";
 import { shallowEqual, useSelector } from "react-redux";
+import { number } from "prop-types";
 
 export default function Navbar() {
   const user = useSelector((state) => state.auth.user, shallowEqual);
@@ -35,7 +36,9 @@ export default function Navbar() {
             />
           </svg>
           <span className="md:flex hidden text-white text-sm uppercase lg:inline-block font-semibold">
-            {getLastItem(window.location.pathname).toUpperCase()}
+            {getLastItem(window.location.pathname).length < 5
+              ? "Attack Surface".toUpperCase()
+              : getLastItem(window.location.pathname).toUpperCase()}
           </span>
           {/* Greetings */}
           <div className="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-3">
