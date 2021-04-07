@@ -3,7 +3,11 @@ import { useQuery } from "@apollo/react-hooks";
 import { useDispatch, shallowEqual, useSelector } from "react-redux";
 
 //actions
-import { dashStats } from "../../actions/dashAction";
+import {
+  dashStats,
+  fetchSectors,
+  fetchCountries,
+} from "../../actions/dashAction";
 
 // components
 import CountryStats from "../../components/Cards/CountryStats";
@@ -11,22 +15,56 @@ import AsnPortStats from "../../components/Cards/AsnPortStats";
 
 // graphql
 import { DASH_STATS } from "../../graphql/query/target";
+import { GET_SECTORS, GET_COUNTRIES } from "../../graphql/query/dashboard";
 
 function Dashboard(props) {
-  const state = useSelector((state) => state.dashboard, shallowEqual);
   // dispatch actions
   const dispatch = useDispatch();
+  // global state
+  const state = useSelector((state) => state.dashboard, shallowEqual);
+
+  // dash stats
   const { data, error, loading } = useQuery(DASH_STATS, {
     fetchPolicy: "network-only",
   });
 
+  // fetch sectors
+  const {
+    data: sectorData,
+    error: sectorError,
+    loading: sectorLoading,
+  } = useQuery(GET_SECTORS, {
+    fetchPolicy: "network-only",
+    onCompleted: (sectorData) => {
+      console.log(sectorData);
+      state?.sectors === null &&
+        dispatch(fetchSectors(sectorData.allCategories));
+    },
+  });
+
+  // fetch countries
+  const {
+    data: countryData,
+    error: countryError,
+    loading: countryLoading,
+  } = useQuery(GET_COUNTRIES, {
+    fetchPolicy: "network-only",
+    onCompleted: (countryData) => {
+      console.log(countryData);
+      state?.countries === null &&
+        dispatch(fetchCountries(countryData.allCountries));
+    },
+  });
+
   useEffect(() => {
-    // TODO: checkfor state.dashStats, initally satte.dashStats should be null || an object if data is loaded
     if (state.dashStats === null && data) {
       // console.log("hello", data);
       dispatch(dashStats(data?.dashStats));
+      // dispatch(fetchSectors());
+      // dispatch(fetchCountries());
     }
   }, [data, state.dashStats, dispatch]);
+
   return (
     <>
       <div className="min-h-screen flex flex-wrap">
