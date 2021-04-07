@@ -51,7 +51,6 @@ export default function Form() {
     allTargets();
   };
 
-  console.log("render..");
   return (
     <>
       <div className="w-full">
@@ -84,26 +83,7 @@ export default function Form() {
                         Search
                       </button>
                     </div>
-                    {/* <div className="flex justify-center mt-4">
-                      <button
-                        type="button"
-                        className="bg-gray-200 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        aria-pressed="false"
-                        aria-labelledby="annual-billing-label"
-                      >
-                        <span className="sr-only">Use setting</span>
-                        <span
-                          aria-hidden="true"
-                          className="translate-x-0 pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200"
-                        ></span>
-                      </button>
-                      <span className="ml-3" id="annual-billing-label">
-                        <span className="text-sm font-medium text-gray-900">
-                          View search engine results{" "}
-                        </span>
-                        <span className="text-sm text-gray-500">(Google)</span>
-                      </span>
-                    </div> */}
+
                     {loading && (
                       <div className="flex justify-center">
                         <Loader type="ThreeDots" />
