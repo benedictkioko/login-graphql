@@ -1,29 +1,59 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { useMutation } from "@apollo/react-hooks";
 import { toast } from "react-toast";
+import Select from "react-select";
+import { useHistory } from "react-router-dom";
 
 // custom hook
 import useForm from "../../constants/useForm";
 
 // graphql
+import { FETCH_TARGET_DETAILS } from "../../graphql/query/target";
 import { CREATE_TARGET_MUTATION } from "../../graphql/mutation/target";
 import { errMsg } from "../../actions/errorAction";
+import { getTargetDetails } from "../../actions/targetAction";
+import { useLazyQuery } from "@apollo/client";
 
-function TargetDefination({ history }) {
+function TargetDefination() {
   const dispatch = useDispatch();
+  const history = useHistory();
+
+  // gloabl state
+  const state = useSelector((state) => state, shallowEqual);
+
+  const [sectorId, setSectorId] = useState();
+  const [countryId, setCountryId] = useState();
+  const [targetId, setTargetId] = useState("");
+
+  // title case
+  function titleCase(str) {
+    str = str.toLowerCase().split(" ");
+    for (var i = 0; i < str.length; i++) {
+      str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+    }
+    return str.join(" ");
+  }
+
+  //  parse sectors
+  const sectors =
+    state.dashboard.sectors &&
+    state.dashboard.sectors.map((sector) => {
+      return { label: titleCase(sector.category), value: sector.id };
+    });
+
+  // parse contries
+  const countries =
+    state.dashboard.countries &&
+    state.dashboard.countries.map((country) => {
+      return { label: titleCase(country.country), value: country.id };
+    });
 
   // initialization
   const { inputs, handleChange, resetForm, clearForm } = useForm({
     name: "",
     target: "",
-    sector: {
-      id: 1,
-    },
     ip: "",
-    country: {
-      id: 1,
-    },
     notes: "",
     status: "Up",
     lat: 0,
@@ -31,23 +61,58 @@ function TargetDefination({ history }) {
     isSubmitted: false,
   });
 
+  const [
+    TargetDetails,
+    { data: resData, loading: isLoading, error: isError },
+  ] = useLazyQuery(FETCH_TARGET_DETAILS, {
+    variables: {
+      id: targetId,
+    },
+    onCompleted: (resData) => {
+      // dispatch(resetQuery());
+      // errorStore.message && dispatch(resetErrors());
+      dispatch(getTargetDetails(resData));
+      history.push(`/app/asr/attack-surface/${targetId}`);
+    },
+    onError: (isError) => {
+      dispatch(errMsg(isError));
+    },
+  });
+
   const [createTarget, { data, loading, error }] = useMutation(
     CREATE_TARGET_MUTATION
   );
 
-  // Login functionality
+  // handle Login
   const handleSubmit = (e) => {
     e.preventDefault();
     createTarget({
-      variables: { name: inputs.name, target: inputs.domain },
+      variables: {
+        input: {
+          name: inputs.name,
+          target: inputs.target,
+          sector: { id: sectorId },
+          country: { id: countryId },
+          ip: inputs.ip,
+          status: inputs.status,
+          notes: inputs.notes,
+          lat: 0,
+          lng: 0,
+        },
+      },
     })
       .then((res) => {
         // dispatch(userLogin(res.data));
-        history.push("/admin/dashboard");
+        setTargetId(res.data.createTarget.target.id);
+        TargetDetails();
         toast.success("Target addded successfully.");
       })
       .catch((error) => {
-        error.graphQLErrors?.map(({ message }) => toast.error(`${message}`));
+        error.graphQLErrors?.map(({ message }) =>
+          message.includes("duplicate key error collection")
+            ? toast.error(`Target already exist.`)
+            : toast.error(`${message}`)
+        );
         if (error.networkError) {
           toast.error(`${error.networkError}.`);
         }
@@ -57,7 +122,7 @@ function TargetDefination({ history }) {
   return (
     <>
       <div className="w-full">
-        <h1 className="font-bold text-sm text-green-600 leading-loose pb-4">
+        <h1 className=" justify-center font-bold text-sm text-green-600 leading-loose pb-4">
           Add Target
         </h1>
         <div className="items-center justify-center">
@@ -65,7 +130,7 @@ function TargetDefination({ history }) {
             <div className="px-12 py-6">
               <div className="text-center mb-4">
                 <div className="max-w-md items-center text-left py-4">
-                  <form onSubmit={handleSubmit}>
+                  <form>
                     <div className="-mx-3 md:flex mb-6">
                       <div className="md:w-full px-3">
                         <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold pb-4">
@@ -78,10 +143,12 @@ function TargetDefination({ history }) {
                           value={inputs.name}
                           onChange={handleChange}
                           placeholder=""
+                          required
                         />
                         <p className="text-grey-dark text-xs italic">
                           Entity name must be unique.
                         </p>
+                        {inputs.name.length === 0 ? <p>Required</p> : ""}
                       </div>
                     </div>
                     <div className="-mx-3 md:flex  py-2">
@@ -94,7 +161,12 @@ function TargetDefination({ history }) {
                           type="text"
                           name="target"
                           value={inputs.target}
-                          onChange={handleChange}
+                          onChange={(e) => {
+                            handleChange(e);
+                            // getGeOIp(e.target.value);
+                            // setInputs({ ...inputs, target: e.target.value });
+                            // handleOnChangeSector(e);
+                          }}
                           placeholder="domain.com"
                         />
                       </div>
@@ -110,6 +182,10 @@ function TargetDefination({ history }) {
                           onChange={handleChange}
                           placeholder="192.168.0.1"
                         />
+                        <p className="text-grey-dark text-xs italic">
+                          (Optional) The system will resolve the domain
+                          provided.
+                        </p>
                       </div>
                     </div>
                     {/* sector */}
@@ -119,21 +195,15 @@ function TargetDefination({ history }) {
                           Sector
                         </label>
                         <div className="relative">
-                          <select className="appearance-none h-full rounded-l border block w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                            <option>-Choose-</option>
-                            <option>Agriculture</option>
-                            <option>Banking</option>
-                            <option>ICT</option>
-                          </select>
-                          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 m-4 text-gray-700">
-                            <svg
-                              className="fill-current h-4 w-4"
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 20 20"
-                            >
-                              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                            </svg>
-                          </div>
+                          {state.dashboard.sectors && (
+                            <Select
+                              placeholder="Select..."
+                              isSearchable
+                              value={sectors.label}
+                              options={sectors}
+                              onChange={(sector) => setSectorId(sector.value)}
+                            />
+                          )}
                         </div>
                       </div>
                     </div>
@@ -144,24 +214,21 @@ function TargetDefination({ history }) {
                           Country
                         </label>
                         <div className="relative">
-                          <select className="appearance-none h-full rounded-l border block w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                            <option>-Choose-</option>
-                            <option>Agriculture</option>
-                            <option>Banking</option>
-                            <option>ICT</option>
-                          </select>
-                          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 m-4 text-gray-700">
-                            <svg
-                              className="fill-current h-4 w-4"
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 20 20"
-                            >
-                              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                            </svg>
-                          </div>
+                          {state.dashboard.countries && (
+                            <Select
+                              placeholder="Select..."
+                              isSearchable
+                              value={countries.label}
+                              options={countries}
+                              onChange={(country) =>
+                                setCountryId(country.value)
+                              }
+                            />
+                          )}
                         </div>
                       </div>
                     </div>
+
                     <div className="-mx-3 md:flex  py-4">
                       <div className="md:w-full px-3">
                         <label
@@ -173,8 +240,10 @@ function TargetDefination({ history }) {
 
                         <textarea
                           className="autoexpand tracking-wide py-2 px-4 mb-3 leading-relaxed appearance-none block w-full bg-gray-200 border border-gray-200 rounded focus:outline-none focus:bg-white focus:border-gray-500"
-                          id="message"
                           type="text"
+                          name="notes"
+                          value={inputs.notes}
+                          onChange={handleChange}
                           placeholder="Notes..."
                         ></textarea>
                       </div>
@@ -193,6 +262,8 @@ function TargetDefination({ history }) {
                         <button
                           type="submit"
                           className="appearance-none bg-gray-900 text-white hover:bg-gray-600 text-base font-semibold tracking-wide uppercase p-2 rounded shadow hover:bg-indigo-light"
+                          onClick={handleSubmit}
+                          disabled={inputs.name === null}
                         >
                           Submit
                         </button>
@@ -207,20 +278,6 @@ function TargetDefination({ history }) {
       </div>
     </>
   );
-}
-
-// function getGEO(domain, target, defineTarget, context) {
-function getGEO(domain) {
-  var url = "https://api.hackertarget.com/geoip/?q=" + domain;
-  return fetch(url)
-    .then((response) => response.text())
-    .then((text) => {
-      var str = text.replace(/\r\n/g, "\r").replace(/\n/g, "\r").split(/\r/);
-      var lat = str[4].split(" ")[1];
-      var lng = str[5].split(" ")[1];
-      // defineTarget({ ...target, lat: lat, lng: lng });
-    })
-    .catch((e) => toast.error("error", "Unable to get targets location"));
 }
 
 export default TargetDefination;
