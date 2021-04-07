@@ -3,6 +3,14 @@ import { Link } from "react-router-dom";
 
 // components
 
+// title case
+function titleCase(str) {
+  str = str.toLowerCase().split(" ");
+  for (var i = 0; i < str.length; i++) {
+    str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+  }
+  return str.join(" ");
+}
 export default function CountryStats() {
   return (
     <>
@@ -11,17 +19,17 @@ export default function CountryStats() {
           <div className="flex flex-wrap items-center">
             <div className="relative w-full px-4 max-w-full flex-grow flex-1">
               <h3 className="font-semibold text-base text-gray-800">
-                TOP ORGANISATIONS
+                {titleCase("TOP ORGANISATIONS")}
               </h3>
             </div>
-            <div className="relative w-full px-4 py-3 max-w-full flex-grow flex-1 text-right">
+            {/* <div className="relative w-full px-4 py-3 max-w-full flex-grow flex-1 text-right">
               <Link
                 to="/app/statistics"
                 className="rounded-md py-2 px-4 text-gray-100 bg-gray-600 hover:bg-gray-900 focus:outline-none"
               >
                 view more
               </Link>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="block w-full overflow-x-auto">
@@ -33,7 +41,7 @@ export default function CountryStats() {
                   Organisation
                 </th>
                 <th className="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
-                  Value
+                  Services
                 </th>
               </tr>
             </thead>
@@ -43,7 +51,7 @@ export default function CountryStats() {
                   safaricombusiness.co.ke
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                  28902
+                  {(28902).toLocaleString()}
                 </td>
               </tr>
               <tr>
@@ -51,7 +59,7 @@ export default function CountryStats() {
                   telkom.co.ke
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                  6682
+                  {(6682).toLocaleString()}
                 </td>
               </tr>
               <tr>
@@ -59,7 +67,7 @@ export default function CountryStats() {
                   liquidtelecom.net
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                  4501
+                  {(4501).toLocaleString()}
                 </td>
               </tr>
               <tr>
@@ -67,7 +75,7 @@ export default function CountryStats() {
                   accesskenya.com
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                  4025
+                  {(4025).toLocaleString()}
                 </td>
               </tr>
               <tr>
@@ -75,7 +83,7 @@ export default function CountryStats() {
                   acesskenya.net
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                  3788
+                  {(3788).toLocaleString()}
                 </td>
               </tr>
             </tbody>
