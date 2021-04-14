@@ -55,7 +55,7 @@ function TargetDefination() {
     target: "",
     ip: "",
     notes: "",
-    status: "Up",
+    status: "up",
     lat: 0,
     lng: 0,
     isSubmitted: false,
