@@ -23,3 +23,10 @@ export const fetchCountries = (data) => {
     payload: data,
   };
 };
+
+export const statsCountries = (data) => {
+  return {
+    type: dashboard.GET_COUNTRIES_STATS_SUCCESS,
+    payload: data,
+  };
+};
