@@ -87,22 +87,22 @@ export default function TargetDetails() {
               <div class="my-2 mx-2 justify-center overflow-auto bg-white rounded-xl shadow-lg p-4 font-inter text-gray-900 text-xs">
                 <span class="text-gray-900 font-semibold">Subdomains</span>
                 <div class="flex flex-col justify-center p-4 space-y-2 text-xs text-blue-400">
-                  <ul>
-                    {state.subdomainSet !== null ? (
-                      state.subdomainSet.map((x) => {
-                        return (
+                  {state.subdomainSet.length === 0 ? (
+                    <Loader type="ThreeDots" height={28} width={28} />
+                  ) : (
+                    state.subdomainSet.map((x) => {
+                      return (
+                        <ul>
                           <li
                             key={x.id}
                             className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-1 text-left"
                           >
                             {x.subdomain}
                           </li>
-                        );
-                      })
-                    ) : (
-                      <Loader type="ThreeDots" />
-                    )}
-                  </ul>
+                        </ul>
+                      );
+                    })
+                  )}
                 </div>
               </div>
             </div>
@@ -112,7 +112,7 @@ export default function TargetDetails() {
                 <span class="text-gray-900 font-semibold">Name Servers</span>
                 <div class="flex flex-col p-4 space-y-2 text-xs text-blue-400">
                   <ul>
-                    {state.dnsserversSet !== null ? (
+                    {state.dnsserversSet.length !== 0 ? (
                       state.dnsserversSet.map((x) => {
                         return (
                           <li
@@ -124,7 +124,7 @@ export default function TargetDetails() {
                         );
                       })
                     ) : (
-                      <Loader type="ThreeDots" />
+                      <Loader type="ThreeDots" height={28} width={28} />
                     )}
                   </ul>
                 </div>
@@ -136,7 +136,7 @@ export default function TargetDetails() {
                 <span class="text-gray-900 font-semibold">Mail Servers</span>
                 <div class="flex flex-col p-4 space-y-2 text-xs text-blue-400">
                   <ul>
-                    {state.mxrecordsSet !== null ? (
+                    {state.mxrecordsSet.length !== 0 ? (
                       state.mxrecordsSet.map((x) => {
                         return (
                           <li
@@ -148,7 +148,7 @@ export default function TargetDetails() {
                         );
                       })
                     ) : (
-                      <Loader type="ThreeDots" />
+                      <Loader type="ThreeDots" height={28} width={28} />
                     )}
                   </ul>
                 </div>
