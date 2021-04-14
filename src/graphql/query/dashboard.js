@@ -17,3 +17,11 @@ export const GET_COUNTRIES = gql`
     }
   }
 `;
+
+export const GET_COUNTRIES_STATS = gql`
+  query stats {
+    targetStats {
+      stats
+    }
+  }
+`;
