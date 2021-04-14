@@ -46,7 +46,7 @@ export default function Body({ data }) {
           key={data.id}
           // data-rowid={data.id}
           // onClick={handleSubmit}
-          className="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+          className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 border-b border-gray-200 hover:bg-gray-100"
         >
           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
             {data.name}
@@ -63,14 +63,12 @@ export default function Body({ data }) {
           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
             <i
               className={
-                data.status === "up"
+                data.status === "up" || "Up"
                   ? "fas fa-arrow-up fill-current text-green-500"
-                  : data.status === "down"
-                  ? "fas fa-arrow-down fill-current text-red-500"
-                  : ""
+                  : "fas fa-arrow-down fill-current text-red-500"
               }
             ></i>{" "}
-            {data.status === "up" ? (
+            {data.status === "up" || "Up" ? (
               <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-500 text-gray-800">
                 up
               </span>
