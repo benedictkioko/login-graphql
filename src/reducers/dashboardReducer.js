@@ -4,6 +4,7 @@ const initialState = {
   dashStats: null,
   sectors: null,
   countries: null,
+  stats: null,
 };
 
 export default function dashboardReducer(state = initialState, action) {
@@ -24,6 +25,12 @@ export default function dashboardReducer(state = initialState, action) {
       return {
         ...state,
         countries: action.payload,
+      };
+
+    case dashboard.GET_COUNTRIES_STATS_SUCCESS:
+      return {
+        ...state,
+        stats: action.payload,
       };
 
     default:
