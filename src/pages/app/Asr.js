@@ -37,7 +37,7 @@ function Asr() {
   const { data, loading, error } = useQuery(GET_TARGETS, {
     variables: {
       search: "",
-      n: 100,
+      n: 50,
       offset: 0,
     },
     fetchPolicy: "network-only",

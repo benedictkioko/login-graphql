@@ -30,7 +30,7 @@ export default function Form() {
   const [allTargets, { data, loading, error }] = useLazyQuery(GET_TARGETS, {
     variables: {
       search: inputs.search,
-      n: 100,
+      n: 50,
       offset: 0,
     },
     onCompleted: (data) => {
