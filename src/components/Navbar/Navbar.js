@@ -36,7 +36,7 @@ export default function Navbar() {
             />
           </svg>
           <span className="md:flex hidden text-white text-sm uppercase lg:inline-block font-semibold">
-            {getLastItem(window.location.pathname).length < 5
+            {getLastItem(window.location.pathname).length < 6
               ? "Attack Surface".toUpperCase()
               : getLastItem(window.location.pathname).toUpperCase()}
           </span>
