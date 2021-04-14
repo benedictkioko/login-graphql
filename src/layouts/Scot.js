@@ -19,7 +19,7 @@ export default function Scot() {
   return (
     <>
       <Sidebar />
-      <div className="relative md:ml-64 bg-gray-200">
+      <div className="relative md:ml-64 bg-gradient-to-r from-rose-100 to-teal-100">
         <Navbar />
         {/* Header */}
         <Header />

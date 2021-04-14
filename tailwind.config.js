@@ -48,6 +48,8 @@ module.exports = {
       purple: colors.violet,
       pink: colors.pink,
       teal: colors.teal,
+      rose: colors.rose,
+      orange: colors.orange,
       custom: "#161313cc",
     },
     spacing: {
