@@ -7,6 +7,7 @@ import {
   dashStats,
   fetchSectors,
   fetchCountries,
+  statsCountries,
 } from "../../actions/dashAction";
 
 // components
@@ -15,7 +16,11 @@ import AsnPortStats from "../../components/Cards/AsnPortStats";
 
 // graphql
 import { DASH_STATS } from "../../graphql/query/target";
-import { GET_SECTORS, GET_COUNTRIES } from "../../graphql/query/dashboard";
+import {
+  GET_SECTORS,
+  GET_COUNTRIES,
+  GET_COUNTRIES_STATS,
+} from "../../graphql/query/dashboard";
 
 function Dashboard(props) {
   // dispatch actions
@@ -53,6 +58,19 @@ function Dashboard(props) {
       console.log(countryData);
       state?.countries === null &&
         dispatch(fetchCountries(countryData.allCountries));
+    },
+  });
+
+  // country stats
+  const {
+    data: statsData,
+    error: statsError,
+    loading: statsLoading,
+  } = useQuery(GET_COUNTRIES_STATS, {
+    fetchPolicy: "network-only",
+    onCompleted: (statsData) => {
+      console.log(statsData);
+      state?.stats === null && dispatch(statsCountries(statsData));
     },
   });
 
